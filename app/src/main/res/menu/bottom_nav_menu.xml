@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_baseline_home_active"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_baseline_notifications_active_24"
+        android:title="@string/title_notifications" />
+
+    <item
+        android:id="@+id/navigation_akun"
+        android:icon="@drawable/ic_round_account_profill"
+        android:title="Akun" />
+
+</menu>

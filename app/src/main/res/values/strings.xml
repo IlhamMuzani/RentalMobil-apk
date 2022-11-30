@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">RentalMobil</string>
+
+    <string name="syarat">
+        SYARAT DAN KETENTUAN UMUM PENGAMBILAN MOBIL:\n\n
+
+   1.E-KTP ( KARTU TANDA PENDUDUK)\n\n
+   2.SIM ( SURAT IZIN MENGEMUDI)\n\n
+   3.KK ( KARTU KELUARGA)\n\n
+   4.SEPEDA MOTOR DAN STNK\n\n
+
+        *NB : Perjanjian dan ketentuan rental dijelaskan di kantor
+
+
+
+    </string>
+    <string name="Required">Required</string>
+    <string name="password">Password</string>
+    <string name="password_confirmation">Konfirmasi Password</string>
+    <string name="Email">Email</string>
+    <string name="Telepon">Telepon</string>
+    <string name="Nama">Nama</string>
+    <string name="Alamat">Alamat</string>
+    <string name="Jenis_Kelamin">jenis Kelamin</string>
+    <string name="Nik">Nik</string>
+    <string name="content_description_end_icon">content_description_end_icon</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Profil</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="menu">Menu</string>
+
+</resources>
