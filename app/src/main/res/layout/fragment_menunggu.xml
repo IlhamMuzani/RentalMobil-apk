@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Menunggu"
+        android:text="Pesanan Menunggu"
         android:textColor="@color/black"
         />
 
@@ -28,6 +28,21 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/layoutdatatidakada"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/bg_btn_lapisanhijau"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Data Tidak Ada !!"/>
+        </LinearLayout>
 
     </LinearLayout>
 

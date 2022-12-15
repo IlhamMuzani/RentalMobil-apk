@@ -7,7 +7,7 @@ import com.anam.rentalmobil.data.model.user.ResponseUser
 interface RegisterContract {
 
     interface Presenter {
-      fun insertregister(nik: String, nama: String, telp: String, alamat: String, gender: String, password: String, password_confirmation:String)
+      fun insertregister(nik: String, nama: String, telp: String, gender: String, latitude: String, longitude: String, alamat: String, password: String, password_confirmation:String)
     }
 
     interface View {

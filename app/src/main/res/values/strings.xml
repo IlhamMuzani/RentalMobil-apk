@@ -25,9 +25,33 @@
     <string name="Nik">Nik</string>
     <string name="content_description_end_icon">content_description_end_icon</string>
 
+
+    <string name="langkah1">Buka aplikasi Rental Mobil kemudian akan muncul halaman utama yaitu daftar mobil yang tersedia</string>
+    <string name="langkah2">Pilihlah icon akun dipojok bawah sebelah kanan</string>
+    <string name="langkah3">kemudian pilih menu registrasi atau login jika anda sudah memiliki akun</string>
+    <string name="Langkah4">Lengkapi data untuk registrasi, jika sudah benar dan selesai maka akan diarahkan ke menu login</string>
+    <string name="Langkah5">Masukan nomor telepon dan password dengan benar</string>
+    <string name="langkah6">Jika login berhasil maka akan diarahkan ke menu utama silakan pilih mobil mana yang akan di sewa klik detail mobil</string>
+    <string name="langkah7">Selanjutnya akan ada tampilan detail mobil jika ingin melanjutkan menyewa mobil tersebut klik pada pilihan detail</string>
+    <string name="langkah8">Masukkan tanggal, lama peminjaman untuk harga akan diinputkan secara otomatis, jika sudah selesai klik booking</string>
+    <string name="langkah9">Selanjutnya pilih icon notifikasi dibagian tengah yang ada dibawah, terdapat daftar mobil yang akan di sewa, klik pada gambar mobil tersebut maka akan diarahkan ke detail transaksi</string>
+    <string name="langkah10">Pada bagian detail transaksi terdapat detail mobil dan detail bookingan, user diarahkan untuk membayar harga sewa mobil secara transfer bank atau membayar secara langsung ketempat rental mobil tersebut</string>
+    <string name="langkah11">Jika sudah bayar mobil yang akan user booking akan pindah secara otomatis ke bagian notifikasi sudah bayar</string>
+
+    <string name="langkah13">Untuk melihat profil pilih icon akun dipojok bawah sebelah kanan jika user sudah login maka akan tampil profil</string>
+    <string name="langkah14">Untuk merubah profil pilih ubah profil maka akan diarahkan ke form ubah profil</string>
+    <string name="langkah15">Jika data yang dirubah sudah selesai pilih kirim maka akan kembali lagi ke profil dengan data yang sudah diperbarui</string>
+    <string name="langkah16">Jika ingin merubah password baru pilih ubah password baru</string>
+    <string name="langkah17">Kemudian akan diarahkan ke form ubah password baru, masukan password baru lalu kirim dan tunggu kode verifikasi</string>
+    <string name="langkah18">Masukkan kode verifikasi dengan benar, jika sudah selesai makan akan kembali diarahkan ke profil</string>
+
     <string name="title_home">Home</string>
     <string name="title_dashboard">Profil</string>
     <string name="title_notifications">Notifications</string>
     <string name="menu">Menu</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_mapslokasi">MapslokasiActivity</string>
+    <string name="title_activity_mapscoba">MapscobaActivity</string>
+    <string name="title_activity_maps1">Maps1Activity</string>
 
 </resources>

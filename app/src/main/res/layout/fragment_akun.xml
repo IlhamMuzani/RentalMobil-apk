@@ -4,93 +4,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:background="@color/teal_700">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_centerInParent="true"
+            android:layout_height="@dimen/_130sdp"
+            android:orientation="vertical"
+            android:gravity="center"
             android:background="@color/white"
             >
 
             <ImageView
                 android:id="@+id/imvgambar"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/profiluser2"
-                android:layout_marginTop="@dimen/_40sdp"/>
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/profiluser2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:orientation="vertical"
-                >
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutnama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_110sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txv_nama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/imvgambar"
                     android:text="User"
-                    android:layout_marginStart="@dimen/_3sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_toEndOf="@+id/imvgambar"
-                android:layout_marginTop="@dimen/_80sdp">
-
-
-                <!--                <Button-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:backgroundTint="@color/teal_700"-->
-                <!--                    android:text="Detail Profil"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    />-->
-
-                <!--                <Button-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="@dimen/_10sdp"-->
-                <!--                    android:backgroundTint="@color/teal_700"-->
-                <!--                    android:text="Ubah Profil"-->
-                <!--                    android:textColor="@color/white"/>-->
-
+                android:layout_marginStart="@dimen/_10sdp">
 
             </LinearLayout>
-
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
+            android:layout_height="match_parent"
             android:background="@color/teal_700"
             android:orientation="vertical">
 
@@ -98,14 +57,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/quicksand_bold"
+                android:textSize="@dimen/_14sdp"
                 android:text="Info Profil"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:id="@+id/linJasa"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_250sdp"
+                android:layout_height="@dimen/_300sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -224,12 +185,21 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/txvGender"
+                        android:id="@+id/txvGenderlakilaki"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/Labelgender"
                         android:layout_toEndOf="@+id/imvGender"
-                        android:text="Gender"
+                        android:text="Laki_Laki"
+                        android:textColor="@color/teal_700" />
+
+                    <TextView
+                        android:id="@+id/txvGenderperempuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Labelgender"
+                        android:layout_toEndOf="@+id/imvGender"
+                        android:text="Perempuan"
                         android:textColor="@color/teal_700" />
 
                 </RelativeLayout>
@@ -240,6 +210,105 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/teal_700"/>
+
+                <RelativeLayout
+                    android:id="@+id/btn_syarat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_keyboard_"
+                        app:tint="@color/teal_700" />
+
+                    <ImageView
+                        android:id="@+id/imvsyarat"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_menu_book_24"
+                        app:tint="@color/teal_700" />
+
+                    <TextView
+                        android:id="@+id/Labelsyarat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/imvsyarat"
+                        android:text="Syarat"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Labelsyarat"
+                        android:layout_toEndOf="@+id/imvsyarat"
+                        android:text="Sayarat Peminjaman Mobil"
+                        android:textColor="@color/teal_700" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/teal_700"/>
+
+                <RelativeLayout
+                    android:id="@+id/btn_ubahPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_keyboard_"
+                        app:tint="@color/teal_700" />
+
+                    <ImageView
+                        android:id="@+id/imvUbahPassword"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_lock_24"
+                        app:tint="@color/teal_700" />
+
+                    <TextView
+                        android:id="@+id/LabelUbahpassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/imvUbahPassword"
+                        android:text="Ubah Password"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/LabelUbahpassword"
+                        android:layout_toEndOf="@+id/imvUbahPassword"
+                        android:text="Ubah Password Baru"
+                        android:textColor="@color/teal_700" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/teal_700"/>
+
 
                 <RelativeLayout
                     android:id="@+id/btn_ubahProfil"
@@ -256,7 +325,8 @@
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/ic_baseline_keyboard_" />
+                        android:src="@drawable/ic_baseline_keyboard_"
+                        app:tint="@color/teal_700" />
 
                     <ImageView
                         android:id="@+id/imvUbahProfil"
@@ -289,65 +359,86 @@
                     android:layout_height="@dimen/_1sdp"
                     android:background="@color/teal_700"/>
 
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/btn_tentang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@color/white">
 
-                    <Button
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_keyboard_"
+                        app:tint="@color/teal_700" />
+
+                    <ImageView
+                        android:id="@+id/imvpetunjuk"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_install_mobile_24"
+                        app:tint="@color/teal_700" />
+
+                    <TextView
+                        android:id="@+id/Labeltentang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_3sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:text="Tentang"/>
+                        android:layout_toEndOf="@+id/imvpetunjuk"
+                        android:text="Tentang"
+                        android:textColor="@color/black" />
 
-                    <Button
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:text="Petunjuk"/>
+                        android:layout_below="@+id/Labeltentang"
+                        android:layout_toEndOf="@+id/imvpetunjuk"
+                        android:text="Tentang Pembuat Aplikasi Ini"
+                        android:textColor="@color/teal_700" />
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:padding="@dimen/_3sdp"
-                        android:text="Syarat"/>
+                </RelativeLayout>
 
-                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/teal_700"/>
 
             </LinearLayout>
 
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_baseline_logout_24"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/_5sdp"
-            app:tint="@color/teal_700" />
-
-            <TextView
-                android:id="@+id/txvLogout"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout"
-                android:textSize="@dimen/_16sdp"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/_7sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_baseline_logout_24"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/txvLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:textSize="@dimen/_16sdp"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
 
     </LinearLayout>
 

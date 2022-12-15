@@ -18,7 +18,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imvImage"
-            android:layout_width="@dimen/_100sdp"
+            android:layout_width="@dimen/_130sdp"
             android:layout_height="@dimen/_80sdp"
             android:layout_marginEnd="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -39,7 +39,6 @@
             android:id="@+id/layoutnama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_toEndOf="@+id/imvImage"
             android:orientation="horizontal">
 
@@ -70,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_22sdp"
             android:layout_toEndOf="@+id/imvImage"
-            android:layout_marginTop="@dimen/_32sdp">
+            android:layout_marginTop="@dimen/_22sdp">
 
             <TextView
                 android:id="@+id/txvHarga"
@@ -90,7 +89,7 @@
             android:layout_height="@dimen/_22sdp"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_toEndOf="@+id/imvImage"
-            android:layout_marginTop="@dimen/_55sdp">
+            android:layout_marginTop="@dimen/_45sdp">
 
 
             <Button

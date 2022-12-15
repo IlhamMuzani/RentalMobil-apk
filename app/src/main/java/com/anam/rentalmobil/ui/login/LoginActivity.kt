@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.database.PrefsManager
 import com.anam.rentalmobil.data.model.user.ResponseUser
+import com.anam.rentalmobil.ui.a_FRAGMENT.FragmenttActivity
 import com.anam.rentalmobil.ui.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -58,8 +60,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun onResult(responseUser: ResponseUser) {
-        presenter.setPrefs(prefsManager, responseUser.user!!)
-        finish()
+        if (responseUser.status == true) {
+            presenter.setPrefs(prefsManager, responseUser.user!!)
+            startActivity(Intent(this, FragmenttActivity::class.java))
+        } else {
+        }
     }
 
     override fun showMessage(message: String) {

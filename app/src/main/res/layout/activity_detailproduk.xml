@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HOMEFRAGMENT.fragment.detailproduk.DetailprodukActivity">
+    tools:context=".ui.a_FRAGMENT.fragment.detailproduk.DetailprodukActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

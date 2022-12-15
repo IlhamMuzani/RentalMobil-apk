@@ -20,13 +20,15 @@ class RegisterPresenter (val view: RegisterContract.View) : RegisterContract.Pre
         nik: String,
         nama: String,
         telp: String,
-        alamat: String,
         gender: String,
+        latitude: String,
+        longitude: String,
+        alamat: String,
         password: String,
         password_confirmation: String
     ) {
         view.onLoading(true)
-        ApiService.endpoint.register(nik, nama, telp, alamat, gender, password, password_confirmation).enqueue(object: Callback<ResponseUser>{
+        ApiService.endpoint.register(nik, nama, telp, gender, latitude, longitude, alamat, password, password_confirmation).enqueue(object: Callback<ResponseUser>{
             override fun onResponse(call: Call<ResponseUser>, response: Response<ResponseUser>) {
                 view.onLoading(false)
                 if (response.isSuccessful) {

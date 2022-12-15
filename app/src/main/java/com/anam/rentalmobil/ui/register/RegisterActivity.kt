@@ -1,5 +1,6 @@
 package com.anam.rentalmobil.ui.register
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,8 +9,11 @@ import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.user.ResponseUser
 import com.anam.rentalmobil.network.ApiService
+import com.anam.rentalmobil.ui.login.LoginActivity
+import com.anam.rentalmobil.ui.maps.MapsActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_updateprofil.*
 import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +31,16 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (Constant.AREA != "") { tv_alamat1.text = Constant.AREA }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Constant.LATITUDE = ""
+        Constant.LONGITUDE = ""
+    }
 
     override fun initActivity() {
 
@@ -40,6 +54,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             onBackPressed()
         }
 
+        Btn_Lokasi1.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
+
         btn_register.setOnClickListener {
             if (edit_textNik.text!!.isEmpty()){
                 edit_textNik.error = "Kolom Tidak Boleh Kosong"
@@ -50,9 +68,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             } else if (edit_phone1.text!!.isEmpty()){
                 edit_phone1.error = "Kolom Tidak Boleh Kosong"
                 edit_phone1.requestFocus()
-            } else if (edit_textAlamat.text!!.isEmpty()){
-                edit_textAlamat.error = "Kolom Tidak Boleh Kosong"
-                edit_textAlamat.requestFocus()
             } else if (edit_Password.text!!.isEmpty()){
                 edit_Password.error = "Kolom Tidak Boleh Kosong"
                 edit_Password.requestFocus()
@@ -60,7 +75,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                 edit_Passwordconfirm.error = "Kolom Tidak Boleh Kosong"
                 edit_Passwordconfirm.requestFocus()
             } else
-                presenter.insertregister(edit_textNik.text.toString(), edit_textName.text.toString(), edit_phone1.text.toString(),edit_textAlamat.text.toString(), radio_JK.checkedRadioButtonId.toString(), edit_Password.text.toString(), edit_Passwordconfirm.text.toString())
+                presenter.insertregister(edit_textNik.text.toString(), edit_textName.text.toString(), edit_phone1.text.toString(), radio_JK.checkedRadioButtonId.toString(), Constant.LATITUDE, Constant.LONGITUDE,tv_alamat1.text.toString(), edit_Password.text.toString(), edit_Passwordconfirm.text.toString())
         }
     }
 
@@ -78,10 +93,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun onResult(responseUser: ResponseUser) {
-        if (responseUser.status) {
-            responseUser.user
+        if (responseUser.status == true) {
+//            responseUser.user
             showMessage(responseUser.message)
-            finish()
+            startActivity(Intent(this, LoginActivity::class.java))
         }else{
             showMessage(responseUser.message)
         }

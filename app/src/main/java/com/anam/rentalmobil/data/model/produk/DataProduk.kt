@@ -5,12 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class DataProduk (
 
     @SerializedName("id") val id: Long?,
-    @SerializedName("nama") val nama: String?,
-    @SerializedName("tahun") val tahun: String?,
-    @SerializedName("plat") val plat: String?,
-    @SerializedName("warna") val warna: String,
-    @SerializedName("kapasitas") val kapasitas: String,
-    @SerializedName("fasilitas") val fasilitas: String,
-    @SerializedName("gambar") val gambar: String,
+    @SerializedName("mobil_id") val mobil_id: String?,
+    @SerializedName("kategori") val kategori: String?,
+    @SerializedName("area") val area: String?,
     @SerializedName("sewa") val sewa: String,
+    @SerializedName("mobil") val mobil: DataMobil,
     )

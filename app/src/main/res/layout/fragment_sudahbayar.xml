@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeSudahbayar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_45sdp"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="Sudah Bayar"
+        android:textColor="@color/black"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvSudahbayar"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/layoutdatakosong"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/bg_btn_lapisanhijau"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Data Tidak Ada !!"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
