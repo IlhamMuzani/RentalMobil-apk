@@ -1,4 +1,4 @@
-package com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.menunggu
+package com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.selesai
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -17,26 +17,27 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
+import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.menunggu.MenungguAdapter
 
-class MenungguFragment : Fragment(), MenungguContract.View {
+class SelesaiFragment : Fragment(), SelesaiContract.View {
 
-    lateinit var presenter: MenungguPresenter
-    lateinit var menungguAdapter: MenungguAdapter
+    lateinit var presenter: SelesaiPresenter
+    lateinit var selesaiAdapter: SelesaiAdapter
     lateinit var dataaTransaksi: DataTransaksi
     lateinit var prefsManager: PrefsManager
 
-    lateinit var layoutdatakosong: LinearLayout
-    lateinit var rcvMenunggu: RecyclerView
-    lateinit var swipeMenunggu: SwipeRefreshLayout
+    lateinit var rcvSelesai: RecyclerView
+    lateinit var swipeSelesai: SwipeRefreshLayout
+    lateinit var layoutkosong: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_menunggu, container, false)
+        val view = inflater.inflate(R.layout.fragment_selesai, container, false)
 
-        presenter = MenungguPresenter(this)
+        presenter = SelesaiPresenter(this)
         prefsManager = PrefsManager(requireActivity())
 
         initFragment(view)
@@ -47,16 +48,16 @@ class MenungguFragment : Fragment(), MenungguContract.View {
     override fun onStart() {
         super.onStart()
         if (prefsManager.prefIsLogin) {
-            presenter.getStatusmenunggu(prefsManager.prefsId.toLong())
+            presenter.getSelesai(prefsManager.prefsId.toLong())
         }
     }
 
     override fun initFragment(view: View) {
-        rcvMenunggu = view.findViewById(R.id.rcvMenunggu)
-        swipeMenunggu = view.findViewById(R.id.swipeMenunggu)
-        layoutdatakosong = view.findViewById(R.id.layoutdatatidakada)
+        rcvSelesai = view.findViewById(R.id.rcvSelesai)
+        swipeSelesai = view.findViewById(R.id.swipeSelesai)
+        layoutkosong = view.findViewById(R.id.layoutdatakosongselesai)
 
-        menungguAdapter = MenungguAdapter(
+        selesaiAdapter = SelesaiAdapter(
             requireActivity(),
             arrayListOf()
         ) { dataTransaksi: DataTransaksi, position: Int, type: String ->
@@ -68,36 +69,39 @@ class MenungguFragment : Fragment(), MenungguContract.View {
             }
 
         }
-        rcvMenunggu.apply {
+        rcvSelesai.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = menungguAdapter
+            adapter = selesaiAdapter
         }
 
-        swipeMenunggu.setOnRefreshListener {
+        swipeSelesai.setOnRefreshListener {
             if (prefsManager.prefIsLogin) {
-                presenter.getStatusmenunggu(prefsManager.prefsId.toLong())
+                presenter.getSelesai(prefsManager.prefsId.toLong())
             }
         }
     }
 
     override fun onloading(loading: Boolean) {
         when (loading) {
-            true -> swipeMenunggu.isRefreshing = true
-            false -> swipeMenunggu.isRefreshing = false
+            true -> swipeSelesai.isRefreshing = true
+            false -> swipeSelesai.isRefreshing = false
         }
     }
 
     override fun onResult(responseTransaksiList: ResponseTransaksiList) {
-        if (responseTransaksiList.dataTransaksi != null) {
+        if (responseTransaksiList.status == true) {
             val transaksi: List<DataTransaksi> = responseTransaksiList.dataTransaksi
-            menungguAdapter.setData(transaksi)
+            selesaiAdapter.setData(transaksi)
 
-            layoutdatakosong.visibility = View.GONE
+            layoutkosong.visibility = View.GONE
         } else {
-            layoutdatakosong.visibility = View.VISIBLE
-            rcvMenunggu.visibility = View.GONE
-
+            layoutkosong.visibility = View.VISIBLE
+            rcvSelesai.visibility = View.GONE
         }
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onResultDelete(responseTransaksiUpdate: ResponseTransaksiUpdate) {
@@ -111,7 +115,7 @@ class MenungguFragment : Fragment(), MenungguContract.View {
 
         dialog.setPositiveButton("Hapus") { dialog, which ->
             presenter.deletetransaksi(Constant.TRANSAKSI_ID)
-            menungguAdapter.removetransaksi(position)
+            selesaiAdapter.removetransaksi(position)
             dialog.dismiss()
         }
 
@@ -121,10 +125,5 @@ class MenungguFragment : Fragment(), MenungguContract.View {
 
         dialog.show()
     }
-
-    override fun showMessage(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
-    }
-
 
 }

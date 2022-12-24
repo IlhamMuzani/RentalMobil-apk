@@ -111,7 +111,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     fun spinnercategory() {
 
         val arrayString = ArrayList<String>()
-        arrayString.add("Pilih Kategori")
+        arrayString.add("All Item")
         arrayString.add("Mobil Rental")
         arrayString.add("Mobil Tour")
 
@@ -125,7 +125,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                 when (position) {
                     0 -> {
                         Constant.PRODUK_ID = 0
-                        Constant.PRODUK_NAME = "Pilih Kategori"
+                        Constant.PRODUK_NAME = "All Item"
                         presenter.Searchproduk(Constant.KEYWORD, Constant.KATEGORI_NAME)
                     }
                     1 -> {

@@ -1,4 +1,4 @@
-package com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.menunggu
+package com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.selesai
 
 import android.content.Context
 import android.content.Intent
@@ -14,15 +14,16 @@ import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.detailtransaksi.DetailtransaksiActivity
 import com.anam.rentalmobil.ui.utils.GlideHelper
 import kotlinx.android.synthetic.main.adapter_menunggu.view.*
+import kotlinx.android.synthetic.main.adapter_selesai.view.*
 import kotlin.collections.ArrayList
 
 
-class MenungguAdapter (val context: Context, var dataTransaksi: ArrayList<DataTransaksi>,
-                       val clickListener: (DataTransaksi, Int, String) -> Unit ):
-        RecyclerView.Adapter<MenungguAdapter.ViewHolder>() {
+class SelesaiAdapter (val context: Context, var dataTransaksi: ArrayList<DataTransaksi>,
+                      val clickListener: (DataTransaksi, Int, String) -> Unit ):
+        RecyclerView.Adapter<SelesaiAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.adapter_menunggu, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.adapter_selesai, parent, false)
     )
 
     override fun getItemCount() = dataTransaksi.size
@@ -30,37 +31,36 @@ class MenungguAdapter (val context: Context, var dataTransaksi: ArrayList<DataTr
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bing(dataTransaksi[position])
 
-        holder.view.layoutmenunggu.setOnClickListener {
+        holder.view.detailselesai.setOnClickListener {
             Constant.TRANSAKSI_ID = dataTransaksi[position].id!!
             context.startActivity(Intent(context, DetailtransaksiActivity::class.java ))
         }
-        GlideHelper.setImage(context, Constant.IP_IMAGE + dataTransaksi[position].produk.mobil.gambar, holder.ImvTransaksi)
 
-        holder.view.txvOptionss.setOnClickListener {
-            val popupMenu = PopupMenu(context, holder.view.txvOptionss)
-            popupMenu.inflate(R.menu.menu_options)
-            popupMenu.setOnMenuItemClickListener {
-                when(it.itemId){
-                    R.id.action_delete -> {
-                        Constant.TRANSAKSI_ID = dataTransaksi[position].id!!
-                        clickListener(dataTransaksi[position], position, "Delete")
-                    }
-                }
-                true
-            }
-
-            popupMenu.show()
-            }
+//        holder.view.txvOptionselesai.setOnClickListener {
+//            val popupMenu = PopupMenu(context, holder.view.txvOptionss)
+//            popupMenu.inflate(R.menu.menu_options)
+//            popupMenu.setOnMenuItemClickListener {
+//                when(it.itemId){
+//                    R.id.action_delete -> {
+//                        Constant.TRANSAKSI_ID = dataTransaksi[position].id!!
+//                        clickListener(dataTransaksi[position], position, "Delete")
+//                    }
+//                }
+//                true
+//            }
+//
+//            popupMenu.show()
+//            }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val view = view
         fun bing(dataTransaksi: DataTransaksi) {
-            view.txvNamaMobil.text = dataTransaksi.produk.mobil.nama
-//            view.txvwarna.text = dataTransaksi.produk.mobil.warna
-            view.txvkategori.text = dataTransaksi.produk.kategori
+            view.txvtransaksiSelesai.text = dataTransaksi.produk.mobil.nama
+            view.txv_tanggal.text = dataTransaksi.tanggal
+            view.txvKategoriselesai.text = dataTransaksi.produk.kategori
+            view.hargaselesai.text = dataTransaksi.harga
         }
-        val ImvTransaksi = view.findViewById<ImageView>(R.id.imvTransaksi)
     }
 
     fun setData(newDataTransaksi: List<DataTransaksi>) {

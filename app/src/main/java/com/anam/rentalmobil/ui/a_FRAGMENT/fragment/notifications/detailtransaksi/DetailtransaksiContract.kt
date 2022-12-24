@@ -20,7 +20,7 @@ interface DetailtransaksiContract {
         fun onLoading(loading: Boolean)
         fun onShowdialoguploadbukti()
         fun onShowDialogRek(dataRekening: List<DataRekening>)
-
+        fun onShowDialogdetailgambar()
         fun onResultTampilrekening(responseRekening: ResponseRekening)
         fun onResultUpdate(responseTransaksiUpdate: ResponseTransaksiUpdate)
         fun onResult(responseTransaksi: ResponseTransaksi)

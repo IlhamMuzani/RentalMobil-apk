@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.database.PrefsManager
@@ -77,6 +78,10 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
         }
 
         btn_ubahprofil.setOnClickListener {
+            val radioID = radio_ubahJK.checkedRadioButtonId
+            val radiobutton = findViewById<RadioButton>(radioID)
+            val gender = radiobutton.text
+
             if (edit_ubahtextNik.text!!.isEmpty()){
                 edit_ubahtextNik.error = "Masukan NIK"
                 edit_ubahtextNik.requestFocus()
@@ -87,7 +92,7 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
                 edit_ubahtextName.error = "Masukan Phone"
                 edit_ubahtextName.requestFocus()
             } else {
-                presenter.Updateprofil(Constant.USER_ID, edit_ubahtextNik.text.toString(), edit_ubahtextName.text.toString(), edit_ubahphone.text.toString(), radio_ubahJK.checkedRadioButtonId.toString(), Constant.LATITUDE, Constant.LONGITUDE, tv_alamat.text.toString(), FileUtils.getFile(this, uriImage))
+                presenter.Updateprofil(Constant.USER_ID, edit_ubahtextNik.text.toString(), edit_ubahtextName.text.toString(), edit_ubahphone.text.toString(), gender.toString(), Constant.LATITUDE, Constant.LONGITUDE, tv_alamat.text.toString(), FileUtils.getFile(this, uriImage))
             }
         }
     }
@@ -113,10 +118,18 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
             GlideHelper.setImage(this, Constant.IP_IMAGE + user.foto, fotoprofile)
         }
 
+        Constant.LATITUDE = user.latitude!!
+        Constant.LONGITUDE = user.longitude!!
         edit_ubahtextNik.setText( user.nik )
         edit_ubahtextName.setText( user.nama )
         edit_ubahphone.setText( user.telp )
         tv_alamat.setText( user.alamat )
+
+        if (user.gender == "P"){
+            radioP.isChecked = true
+        }else{
+            radioL.isChecked = true
+        }
 
     }
 

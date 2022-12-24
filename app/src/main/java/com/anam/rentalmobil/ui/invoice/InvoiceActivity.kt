@@ -40,7 +40,7 @@ class InvoiceActivity : AppCompatActivity(), InvoiceContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.getDetail(Constant.USER_ID)
+        presenter.getDetail(Constant.TRANSAKSI_ID)
     }
 
     override fun initActivity() {
@@ -58,7 +58,7 @@ class InvoiceActivity : AppCompatActivity(), InvoiceContract.View {
 //        }
 
         btnprint.setOnClickListener(View.OnClickListener { // Code Here ==========
-            presenter.getDetail(Constant.USER_ID)
+            presenter.getDetail(Constant.TRANSAKSI_ID)
             createWebPrintJob(webView!!)
         })
         webView!!.webChromeClient = WebChromeClient()
@@ -75,7 +75,7 @@ class InvoiceActivity : AppCompatActivity(), InvoiceContract.View {
                 btnprint.setVisibility(View.VISIBLE)
             }
         }
-        webView!!.loadUrl("https://travel.ufomediategal.com/api/transaksi-invoice/" + Constant.USER_ID)
+        webView!!.loadUrl("https://travel.ufomediategal.com/api/transaksi-invoice/" + Constant.TRANSAKSI_ID)
 
     }
 

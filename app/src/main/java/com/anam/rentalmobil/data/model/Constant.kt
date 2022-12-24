@@ -12,6 +12,9 @@ class Constant {
 
         var AREA: String = ""
         var KEYWORD: String = ""
+        var LAMA: String = ""
+        var HARGA: String = ""
+        var TANGGAL: String = ""
 
         const val LOCATION_PERMISSION_REQUEST_CODE = 1;
 

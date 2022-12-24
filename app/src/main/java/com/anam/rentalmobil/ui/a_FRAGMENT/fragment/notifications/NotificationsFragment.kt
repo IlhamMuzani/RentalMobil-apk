@@ -11,6 +11,7 @@ import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.database.PrefsManager
 import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.ViewPagerAdapter
 import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.menunggu.MenungguFragment
+import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.selesai.SelesaiFragment
 import com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.sudahbayar.SudahbayarFragment
 import com.google.android.material.tabs.TabLayout
 
@@ -43,6 +44,11 @@ class NotificationsFragment : Fragment(), NotificationsContract.View {
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        
+    }
+
     override fun initFragment(view: View) {
 
         viewpager = view.findViewById(R.id.btn_viewpager)
@@ -52,11 +58,13 @@ class NotificationsFragment : Fragment(), NotificationsContract.View {
 
         adapter.addFragment(MenungguFragment(), "Menunggu")
         adapter.addFragment(SudahbayarFragment(), "Sewa")
+        adapter.addFragment(SelesaiFragment(), "History")
         viewpager.adapter = adapter
         btn_tabs.setupWithViewPager(viewpager)
 
         btn_tabs.getTabAt(0)!!.setIcon(R.drawable.ic_baseline_access_jam)
         btn_tabs.getTabAt(1)!!.setIcon(R.drawable.dikonfirmasi2)
+        btn_tabs.getTabAt(2)!!.setIcon(R.drawable.done)
 
     }
 

@@ -26,6 +26,7 @@ interface BookingContract {
         fun onResult(responseBookingInsert: ResponseBookingInsert)
 //        fun onResultrevel(responseBookingInsert: ResponseBookingInsert)
 //        fun onResultSopir(responseSopirList: ResponseSopirList)
+        fun onShowdialogkonfirmasi()
         fun onResultdetail(responseProduk: ResponseProduk)
         fun showMessage(message: String)
     }

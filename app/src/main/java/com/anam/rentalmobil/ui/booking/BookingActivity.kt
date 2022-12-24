@@ -14,7 +14,13 @@ import com.anam.rentalmobil.data.model.produk.DataProduk
 import com.anam.rentalmobil.data.model.produk.ResponseProduk
 import com.anam.rentalmobil.data.model.produk.ResponseProdukList
 import com.anam.rentalmobil.data.model.user.ResponseSopirList
+import com.anam.rentalmobil.ui.utils.FileUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.lazday.poslaravel.util.GalleryHelper
 import kotlinx.android.synthetic.main.activity_booking.*
+import kotlinx.android.synthetic.main.activity_booking.view.*
+import kotlinx.android.synthetic.main.dialog_bukti.view.*
+import kotlinx.android.synthetic.main.dialog_konfirmasi.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,19 +40,15 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
 
     override fun onStart() {
         super.onStart()
-//        presenter.getSopir()
         presenter.getDetailproduk(Constant.PRODUK_ID)
     }
 
     override fun initActivity() {
-        tv_nama.text ="Booking"
-//        tvDatePicker = findViewById(R.id.edt_tanggal)
-
+        tv_nama.text = "Booking"
         tanggal()
-//        spinnerarea()
-//        spinnerkategori()
-        spinnerlama()
+//        spinnerlama()
     }
+
     override fun initListener() {
 
         ivKembali.setOnClickListener {
@@ -54,57 +56,13 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         }
 
         btn_booking.setOnClickListener {
-//            if (Constant.KATEGORI_ID == 0) {
-//                showMessage("Pilih Kategori Terlebih Dahulu")
-//           tanggal belum ada show messege
-           if (Constant.LAMA_ID == 0) {
-                showMessage("Pilih Lama Peminjaman")
-            } else if (edt_harga.text!!.isEmpty()) {
-                edt_harga.error = " Kolom Tidak Boleh Kosong"
-                edt_harga.requestFocus()
-            } else {
-
-                presenter.inserBooking(
-                    prefsManager.prefsId,
-                    Constant.PRODUK_ID.toString(),
-//                    Constant.KATEGORI_NAME,
-                    edt_tanggal.text.toString(),
-                    Constant.LAMA_NAME,
-                    edt_harga.text.toString()
-                )
-            }
+//            if (edt_lama.text!!.isEmpty()) {
+//                edt_lama.error = " Kolom Tidak Boleh Kosong"
+//                edt_lama.requestFocus()
+//            } else {
+            onShowdialogkonfirmasi()
         }
 
-//        btn_bookingtrevel.setOnClickListener {
-//
-//            if (Constant.KATEGORI_ID == 0) {
-//                showMessage("Pilih Kategori Terlebih Dahulu")
-//                //tanggal belum ana showmess
-//            } else if (Constant.KATEGORI_ID == 0) {
-//               showMessage("Pilih Sopir")
-//            } else if (Constant.AREA_ID == 0) {
-//                showMessage("Pilih Area")
-//            } else if (Constant.LAMA_ID == 0) {
-//                showMessage("Pilih Lama Peminjaman")
-//                edt_lama.requestFocus()
-//            } else if (edt_harga.text!!.isEmpty()) {
-//                edt_harga.error = " Kolom Tidak Boleh Kosong"
-//                edt_harga.requestFocus()
-//            } else {
-//
-//                presenter.inserBookingtrevel(
-//                    prefsManager.prefsId,
-//                    Constant.PRODUK_ID.toString(),
-//                    Constant.KATEGORI_NAME,
-//                    Constant.SOPIR_ID.toString(),
-//                    Constant.AREA_NAME,
-//                    edt_tanggal.text.toString(),
-//                    Constant.LAMA_NAME,
-//                    edt_harga.text.toString()
-//                )
-//            }
-//
-//        }
     }
 
     override fun onLoading(loading: Boolean) {
@@ -112,12 +70,10 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
             true -> {
                 progressbooking.visibility = View.VISIBLE
                 btn_booking.visibility = View.GONE
-//                btn_bookingtrevel.visibility = View.GONE
             }
             false -> {
                 progressbooking.visibility = View.GONE
                 btn_booking.visibility = View.VISIBLE
-//                btn_bookingtrevel.visibility = View.VISIBLE
             }
         }
     }
@@ -126,6 +82,36 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         showMessage(responseBookingInsert.message)
         finish()
     }
+
+    override fun onShowdialogkonfirmasi() {
+        val dialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.dialog_konfirmasi, null)
+
+        view.btn_tolak.setOnClickListener {
+            dialog.dismiss()
+        }
+        Constant.HARGA = (edt_lama.text.toString().toInt() * harga.toInt()).toString()
+        view.txtHargakonfirmasi.text = (edt_lama.text.toString().toInt() * harga.toInt()).toString()
+        view.btn_konfirmasi.setOnClickListener {
+
+                presenter.inserBooking(
+                    prefsManager.prefsId,
+                    Constant.PRODUK_ID.toString(),
+//                    Constant.KATEGORI_NAME,
+                    edt_tanggal.text.toString(),
+//                    Constant.LAMA_NAME,
+                    edt_lama.text.toString(),
+                   Constant.HARGA
+                )
+                dialog.dismiss()
+                finish()
+            }
+
+            dialog.setContentView(view)
+            dialog.show()
+    }
+
+
     override fun onResultdetail(responseProduk: ResponseProduk) {
         harga = responseProduk.dataproduk!!.sewa.toInt()
     }
@@ -139,203 +125,88 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         return super.onSupportNavigateUp()
     }
 
-    fun tanggal(){
+    fun tanggal() {
         val myCalender = Calendar.getInstance()
         val datePicter = DatePickerDialog.OnDateSetListener { view, year, month,
                                                               dayofmonth ->
-            myCalender.set(Calendar.YEAR,year)
-            myCalender.set(Calendar.MONTH,month)
-            myCalender.set(Calendar.DAY_OF_MONTH,dayofmonth)
+            myCalender.set(Calendar.YEAR, year)
+            myCalender.set(Calendar.MONTH, month)
+            myCalender.set(Calendar.DAY_OF_MONTH, dayofmonth)
             updateLable(myCalender)
         }
 
         edt_tanggal.setOnClickListener {
-            DatePickerDialog(this, datePicter, myCalender.get(Calendar.YEAR),
+            DatePickerDialog(
+                this, datePicter, myCalender.get(Calendar.YEAR),
                 myCalender.get(Calendar.MONTH),
-                myCalender.get(Calendar.DAY_OF_MONTH)).show()
+                myCalender.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
     }
+
     private fun updateLable(myCalendar: Calendar) {
         val myformat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myformat, Locale.UK)
         edt_tanggal.setText(sdf.format(myCalendar.time))
     }
 
-    fun spinnerlama() {
-
-        val arrayString = ArrayList<String>()
-        arrayString.add("- Pilih -")
-        arrayString.add("1 Hari")
-        arrayString.add("2 Hari")
-        arrayString.add("3 Hari")
-        arrayString.add("4 Hari")
-        arrayString.add("5 Hari")
-        arrayString.add("6 Hari")
-        arrayString.add("7 Hari")
-
-        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edt_lama.adapter = adapter
-        val selection = adapter.getPosition(Constant.LAMA_NAME)
-        edt_lama.setSelection(selection)
-        edt_lama.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (position) {
-                    0 -> {
-                        Constant.LAMA_ID = 0
-                        Constant.LAMA_NAME = "Pilih"
-                    }
-                    1 -> {
-                        Constant.LAMA_ID = 1
-                        Constant.LAMA_NAME = "1"
-
-                    }
-                    2 -> {
-                        Constant.LAMA_ID = 2
-                        Constant.LAMA_NAME = "2"
-                    }
-                    3 -> {
-                        Constant.LAMA_ID = 3
-                        Constant.LAMA_NAME = "3"
-                    }
-                    4 -> {
-                        Constant.LAMA_ID = 4
-                        Constant.LAMA_NAME = "4"
-                    }
-                    5 -> {
-                        Constant.LAMA_ID = 5
-                        Constant.LAMA_NAME = "5"
-                    }
-                    6 -> {
-                        Constant.LAMA_ID = 6
-                        Constant.LAMA_NAME = "6"
-                    }
-                    else -> {
-                        Constant.LAMA_ID = 7
-                        Constant.LAMA_NAME = "7"
-                    }
-                }
-                if(harga != 0 && Constant.LAMA_ID != 0) {
-                    val lama = Constant.LAMA_ID * harga
-                    edt_harga.setText((lama).toString())
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-    }
-
-
-//    fun spinnersopir(responseSopirList: ResponseSopirList) {
+//    fun spinnerlama() {
 //
 //        val arrayString = ArrayList<String>()
-//        arrayString.add("- Pilih Sopir -")
-//        for (sopir in responseSopirList.datasopir){arrayString.add(sopir.nama!!)}
+//        arrayString.add("- Pilih -")
+//        arrayString.add("1 Hari")
+//        arrayString.add("2 Hari")
+//        arrayString.add("3 Hari")
+//        arrayString.add("4 Hari")
+//        arrayString.add("5 Hari")
+//        arrayString.add("6 Hari")
+//        arrayString.add("7 Hari")
 //
 //        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        edt_sopir.adapter = adapter
-//        val selection = adapter.getPosition(Constant.SOPIR_NAME)
-//        edt_sopir.setSelection(selection)
-//        edt_sopir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//        edt_lama.adapter = adapter
+//        val selection = adapter.getPosition(Constant.LAMA_NAME)
+//        edt_lama.setSelection(selection)
+//        edt_lama.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 //            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //                when (position) {
 //                    0 -> {
-//                        Constant.SOPIR_ID = 0
-//                        Constant.SOPIR_NAME = "Pilih Sopir"
-//                        btn_booking.visibility = View.GONE
+//                        Constant.LAMA_ID = 0
+//                        Constant.LAMA_NAME = "Pilih"
+//                    }
+//                    1 -> {
+//                        Constant.LAMA_ID = 1
+//                        Constant.LAMA_NAME = "1"
+//
+//                    }
+//                    2 -> {
+//                        Constant.LAMA_ID = 2
+//                        Constant.LAMA_NAME = "2"
+//                    }
+//                    3 -> {
+//                        Constant.LAMA_ID = 3
+//                        Constant.LAMA_NAME = "3"
+//                    }
+//                    4 -> {
+//                        Constant.LAMA_ID = 4
+//                        Constant.LAMA_NAME = "4"
+//                    }
+//                    5 -> {
+//                        Constant.LAMA_ID = 5
+//                        Constant.LAMA_NAME = "5"
+//                    }
+//                    6 -> {
+//                        Constant.LAMA_ID = 6
+//                        Constant.LAMA_NAME = "6"
 //                    }
 //                    else -> {
-//                        presenter.getSopir()
-//                        val namaSopir = responseSopirList.datasopir[position - 1].nama
-//                        Constant.SOPIR_ID = position
-//                        Constant.SOPIR_NAME = namaSopir.toString()
-//                        btn_booking.visibility = View.GONE
+//                        Constant.LAMA_ID = 7
+//                        Constant.LAMA_NAME = "7"
 //                    }
 //                }
-//            }
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//            }
-//        }
-//
-//    }
-
-//    fun spinnerkategori() {
-//
-//        val arrayString = ArrayList<String>()
-//        arrayString.add("- Pilih Kategori -")
-//        arrayString.add("Sewa Rental")
-//        arrayString.add("Sewa Trevel")
-//
-//        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        edt_kategori.adapter = adapter
-//        val selection = adapter.getPosition(Constant.KATEGORI_NAME)
-//        edt_kategori.setSelection(selection)
-//        edt_kategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                when (position) {
-//                    0 -> {
-//                        Constant.KATEGORI_ID = 0
-//                        Constant.KATEGORI_NAME = "Pilih Kategori"
-//                        btn_booking.visibility = View.GONE
-//                        btn_booking.visibility = View.VISIBLE
-//                    }
-//                    1 -> {
-//                        Constant.KATEGORI_ID = 1
-//                        Constant.KATEGORI_NAME = "Rental"
-//                        layoutsopirdanarea.visibility = View.GONE
-//                        btn_bookingtrevel.visibility = View.GONE
-//                        btn_booking.visibility = View.VISIBLE
-//                    }
-//                    2 -> {
-//                        Constant.KATEGORI_ID = 2
-//                        Constant.KATEGORI_NAME = "Travel"
-//                        layoutsopirdanarea.visibility = View.VISIBLE
-//                        btn_bookingtrevel.visibility = View.VISIBLE
-//                        btn_booking.visibility = View.GONE
-//                    }
-//                }
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//            }
-//        }
-//
-//    }
-
-//    fun spinnerarea() {
-//
-//        val arrayString = ArrayList<String>()
-//        arrayString.add("- Pilih Area -")
-//        arrayString.add("Dalam Kota")
-//        arrayString.add("Luar Kota")
-//
-//        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        edt_area.adapter = adapter
-//        val selection = adapter.getPosition(Constant.AREA_NAME)
-//        edt_area.setSelection(selection)
-//        edt_area.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                when (position) {
-//                    0 -> {
-//                        Constant.AREA_ID = 0
-//                        Constant.AREA_NAME = "Pilih Area"
-//                    }
-//                    1 -> {
-//                        Constant.AREA_ID = 1
-//                        Constant.AREA_NAME = "dalam"
-//                    }
-//                    2 -> {
-//                        Constant.AREA_ID = 2
-//                        Constant.AREA_NAME = "luar"
-//                    }
+//                if (harga != 0 && Constant.LAMA_ID != 0) {
+//                    val lama = Constant.LAMA_ID * harga
+//                    edt_harga.setText((lama).toString())
 //                }
 //            }
 //

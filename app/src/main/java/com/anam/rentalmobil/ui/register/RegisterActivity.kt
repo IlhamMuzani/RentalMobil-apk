@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.user.ResponseUser
@@ -65,6 +67,9 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             } else if (edit_textName.text!!.isEmpty()){
                 edit_textName.error = "Kolom Tidak Boleh Kosong"
                 edit_textName.requestFocus()
+//            } else if (radio_JK){
+//                showMessage("Pilih Gender")
+//                radio_JK.requestFocus()
             } else if (edit_phone1.text!!.isEmpty()){
                 edit_phone1.error = "Kolom Tidak Boleh Kosong"
                 edit_phone1.requestFocus()

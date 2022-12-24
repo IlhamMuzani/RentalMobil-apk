@@ -1,0 +1,55 @@
+package com.anam.rentalmobil.ui.a_FRAGMENT.fragment.notifications.tabs.selesai
+
+import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
+import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
+import com.anam.rentalmobil.network.ApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class SelesaiPresenter (var view: SelesaiContract.View) : SelesaiContract.Presenter {
+
+
+    override fun getSelesai(kd_user: Long) {
+        view.onloading(true)
+        ApiService.endpoint.gettransaksiSelesai(kd_user).enqueue(object : Callback<ResponseTransaksiList>{
+            override fun onResponse(
+                call: Call<ResponseTransaksiList>,
+                response: Response<ResponseTransaksiList>
+            ) {
+                view.onloading(false)
+                if (response.isSuccessful){
+                    val responseTransaksiList: ResponseTransaksiList? = response.body()
+                    view.onResult(responseTransaksiList!!)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseTransaksiList>, t: Throwable) {
+                view.onloading(false)
+            }
+
+        })
+    }
+
+    override fun deletetransaksi(id: Long) {
+        view.onloading(true)
+        ApiService.endpoint.deletetransaksi(id).enqueue(object : Callback<ResponseTransaksiUpdate>{
+            override fun onResponse(
+                call: Call<ResponseTransaksiUpdate>,
+                response: Response<ResponseTransaksiUpdate>
+            ) {
+                view.onloading(false)
+                if (response.isSuccessful) {
+                    val responseTransaksiUpdate: ResponseTransaksiUpdate? = response.body()
+                    view.onResultDelete( responseTransaksiUpdate!! )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseTransaksiUpdate>, t: Throwable) {
+                view.onloading(false)
+            }
+
+        })
+    }
+
+}

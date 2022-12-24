@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Nik"
                 android:maxLength="18"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:lines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>

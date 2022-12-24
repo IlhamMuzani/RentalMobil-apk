@@ -22,8 +22,10 @@ class UpdateprofilPresenter (val view: UpdateprofilContract.View) : Updateprofil
     }
 
     override fun getdetailprofil(id: String) {
+        view.onLoading(true)
         ApiService.endpoint.ProfilDetail(id).enqueue(object : Callback<ResponseUserdetail>{
             override fun onResponse(call: Call<ResponseUserdetail>, response: Response<ResponseUserdetail>) {
+                view.onLoading(false)
                 if (response.isSuccessful){
                     val responseUserdetail: ResponseUserdetail? = response.body()
                     view.onResult(responseUserdetail!!)

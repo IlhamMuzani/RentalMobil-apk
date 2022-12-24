@@ -146,9 +146,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val addressList = geocoder.getFromLocation(latitude, longitude, 1)
             if (addressList != null && addressList.size > 0) {
                 Constant.AREA =
-                    addressList[0].subLocality + ", " + addressList[0].locality
-//                Constant.CITY = addressList[0].subAdminArea
-//                Constant.PROVINCE = addressList[0].adminArea
+                    addressList[0].subLocality + ", " + addressList[0].locality  + ", " + addressList[0].subAdminArea + ", " + addressList[0].adminArea
+               addressList[0].adminArea
             }
         } catch (e: IOException) {
             e.printStackTrace()

@@ -85,8 +85,13 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
         }
 
         btninvoice.setOnClickListener {
-            presenter.getDetailtransaksi(Constant.USER_ID)
+            presenter.getDetailtransaksi(Constant.TRANSAKSI_ID)
             startActivity(Intent(this, InvoiceActivity::class.java))
+        }
+
+        imvbukti.setOnClickListener {
+            Constant.USER_ID = transaksi.id!!
+            onShowDialogdetailgambar()
         }
 
     }
@@ -149,6 +154,17 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
         dialog.show()
     }
 
+    override fun onShowDialogdetailgambar() {
+        val dialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.dialog_gambar, null)
+        val imvgambar = view.findViewById<ImageView>(R.id.imvgambar)
+
+        GlideHelper.setImage(this, Constant.IP_IMAGE + transaksi.bukti, imvgambar)
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
     override fun onResultTampilrekening(responseRekening: ResponseRekening) {
         val datarekening: List<DataRekening> = responseRekening.datarekening
 
@@ -179,11 +195,14 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
         if(transaksi.bukti.isNullOrEmpty()){
                 layout_bukti.visibility = View.GONE
                 btninvoice.visibility = View.GONE
-        }else{
+        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "menunggu"){
                 layout_bukti.visibility = View.VISIBLE
                 btnuploadbukti.visibility = View.GONE
-                btninvoice.visibility = View.VISIBLE
                 GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + transaksi.bukti!!, imvbukti)
+        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "selesai"){
+            btninvoice.visibility = View.GONE
+            btnuploadbukti.visibility = View.GONE
+            GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + transaksi.bukti!!, imvbukti)
         }
     }
 

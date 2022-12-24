@@ -47,8 +47,8 @@
                 android:layout_width="@dimen/_97sdp"
                 android:layout_height="@dimen/_97sdp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/img_add_image"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/img_add_image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,11 +169,13 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/radioL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="L"/>
 
                     <RadioButton
+                        android:id="@+id/radioP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="P"/>

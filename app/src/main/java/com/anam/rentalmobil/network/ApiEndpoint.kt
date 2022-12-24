@@ -115,6 +115,11 @@ interface ApiEndpoint {
         @Path("kd_user") kd_user: Long
     ): Call<ResponseTransaksiList>
 
+    @GET("transaksi-selesai/{kd_user}")
+    fun gettransaksiSelesai(
+        @Path("kd_user") kd_user: Long
+    ): Call<ResponseTransaksiList>
+
     @DELETE("transaksi/{id}")
     fun deletetransaksi(
         @Path("id") id: Long
