@@ -19,9 +19,12 @@ interface UpdateprofilContract {
     interface View {
         fun initActivity()
         fun initListener()
-        fun onLoading(loading: Boolean)
+        fun onLoading(loading: Boolean, message: String? = "Loading..")
         fun onResult(responseUserdetail: ResponseUserdetail)
         fun onResultupdate(responseUser: ResponseUser)
-        fun showMessage(message: String)
+        fun showSuccesOk(message: String)
+        fun showSucces(message: String)
+        fun showError(message: String)
+        fun showAlert(message: String)
     }
 }

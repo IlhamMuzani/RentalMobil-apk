@@ -1,6 +1,7 @@
 package com.anam.rentalmobil.ui.booking
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,8 @@ import com.anam.rentalmobil.data.model.produk.DataProduk
 import com.anam.rentalmobil.data.model.produk.ResponseProduk
 import com.anam.rentalmobil.data.model.produk.ResponseProdukList
 import com.anam.rentalmobil.data.model.user.ResponseSopirList
+import com.anam.rentalmobil.ui.fragment.UserActivity
+import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import com.anam.rentalmobil.ui.utils.FileUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.lazday.poslaravel.util.GalleryHelper
@@ -22,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_booking.view.*
 import kotlinx.android.synthetic.main.dialog_bukti.view.*
 import kotlinx.android.synthetic.main.dialog_konfirmasi.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +34,11 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
     lateinit var presenter: BookingPresenter
     lateinit var prefsManager: PrefsManager
     var harga: Int = 0
+
+    lateinit var sLoading: SweetAlertDialog
+    lateinit var sError: SweetAlertDialog
+    lateinit var sSuccess: SweetAlertDialog
+    lateinit var sAlert: SweetAlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +55,11 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
     override fun initActivity() {
         tv_nama.text = "Booking"
         tanggal()
-//        spinnerlama()
+
+        sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
+        sError = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
+        sAlert = SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Peringatan !")
     }
 
     override fun initListener() {
@@ -56,31 +69,34 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         }
 
         btn_booking.setOnClickListener {
-//            if (edt_lama.text!!.isEmpty()) {
-//                edt_lama.error = " Kolom Tidak Boleh Kosong"
-//                edt_lama.requestFocus()
-//            } else {
-            onShowdialogkonfirmasi()
-        }
+            if (edt_tanggal.text!!.isEmpty()) {
+                showError("Masukkan Tanggal !")
+            } else if (edt_lama.text!!.isEmpty()) {
+                showError("Masukkan lama sewa !")
+            } else {
+                onShowdialogkonfirmasi()
+            }
 
+        }
     }
 
-    override fun onLoading(loading: Boolean) {
+    override fun onLoading(loading: Boolean, message: String?) {
         when (loading) {
             true -> {
-                progressbooking.visibility = View.VISIBLE
-                btn_booking.visibility = View.GONE
+                sLoading.setContentText(message).show()
             }
             false -> {
-                progressbooking.visibility = View.GONE
-                btn_booking.visibility = View.VISIBLE
+                sLoading.dismiss()
             }
         }
     }
 
     override fun onResult(responseBookingInsert: ResponseBookingInsert) {
-        showMessage(responseBookingInsert.message)
-        finish()
+        if (responseBookingInsert.status) {
+            showSuccessOK(responseBookingInsert.message)
+        } else {
+            showError(responseBookingInsert.message)
+        }
     }
 
     override fun onShowdialogkonfirmasi() {
@@ -91,7 +107,7 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
             dialog.dismiss()
         }
         Constant.HARGA = (edt_lama.text.toString().toInt() * harga.toInt()).toString()
-        view.txtHargakonfirmasi.text = (edt_lama.text.toString().toInt() * harga.toInt()).toString()
+        view.txtHargakonfirmasi.text = NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(Integer.valueOf((edt_lama.text.toString().toInt() * harga.toInt()).toString()))
         view.btn_konfirmasi.setOnClickListener {
 
                 presenter.inserBooking(
@@ -104,7 +120,6 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
                    Constant.HARGA
                 )
                 dialog.dismiss()
-                finish()
             }
 
             dialog.setContentView(view)
@@ -116,8 +131,46 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         harga = responseProduk.dataproduk!!.sewa.toInt()
     }
 
-    override fun showMessage(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    override fun showSuccessOK(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setConfirmText("OK")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                finish()
+            }.show()
+    }
+
+    override fun showSuccess(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setTitleText("Ok")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }.show()
+    }
+
+    override fun showError(message: String) {
+        sError
+            .setContentText(message)
+            .setConfirmText("Gagal")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+    }
+
+    override fun showAlert(message: String) {
+        sAlert
+            .setContentText(message)
+            .setTitleText("Ya")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }
+            .setTitleText("Nanti")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+        sAlert.setCancelable(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {

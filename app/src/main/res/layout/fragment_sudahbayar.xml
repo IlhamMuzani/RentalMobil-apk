@@ -13,19 +13,50 @@
         android:paddingBottom="@dimen/_45sdp"
         android:orientation="vertical"
         >
-    <TextView
-        android:layout_marginTop="@dimen/_18sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:text="Sudah Bayar"
-        android:textColor="@color/black"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Sudah Bayar"
+                android:textColor="@color/black" />
 
-    <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="end">
+
+                <LinearLayout
+                    android:id="@+id/lin_refreshbayar"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:backgroundTint="@color/teal_700"
+                    android:background="@drawable/bg_gradasiatasabawahradiuskecil">
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:backgroundTint="@color/white"
+                        android:background="@drawable/ic_baseline_refresh_24"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvSudahbayar"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_7sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

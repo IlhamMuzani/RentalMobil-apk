@@ -13,8 +13,11 @@ interface PasswordbaruContract {
     interface View {
         fun initActivity()
         fun initListener()
-        fun onLoading(loading: Boolean)
+        fun onLoading(loading: Boolean, message: String? = "Loading..")
         fun onResult(responseUser: ResponseUser)
-        fun showMessage(message: String)
+        fun showSuccesOk(message: String)
+        fun showSucces(message: String)
+        fun showError(message: String)
+        fun showAlert(message: String)
     }
 }

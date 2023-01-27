@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
@@ -13,6 +14,7 @@ import com.anam.rentalmobil.data.model.user.ResponseUser
 import com.anam.rentalmobil.network.ApiService
 import com.anam.rentalmobil.ui.login.LoginActivity
 import com.anam.rentalmobil.ui.maps.MapsActivity
+import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_updateprofil.*
@@ -25,6 +27,12 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     lateinit var presenter: RegisterPresenter
     lateinit var telp: String
+    private var gender: String? = null
+
+    lateinit var sLoading: SweetAlertDialog
+    lateinit var sError: SweetAlertDialog
+    lateinit var sSuccess: SweetAlertDialog
+    lateinit var sAlert: SweetAlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +43,9 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun onStart() {
         super.onStart()
-        if (Constant.AREA != "") { tv_alamat1.text = Constant.AREA }
+        if (Constant.AREA != "") {
+            tv_alamat1.text = Constant.AREA
+        }
     }
 
     override fun onDestroy() {
@@ -46,7 +56,13 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun initActivity() {
 
-        tv_nama.text ="Register"
+        sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
+        sError = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
+        sAlert = SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Peringatan !")
+
+        tv_nama.text = "Register"
+        radiolakilaki.isChecked = true
 
     }
 
@@ -61,54 +77,100 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         }
 
         btn_register.setOnClickListener {
-            if (edit_textNik.text!!.isEmpty()){
-                edit_textNik.error = "Kolom Tidak Boleh Kosong"
-                edit_textNik.requestFocus()
-            } else if (edit_textName.text!!.isEmpty()){
-                edit_textName.error = "Kolom Tidak Boleh Kosong"
-                edit_textName.requestFocus()
-//            } else if (radio_JK){
-//                showMessage("Pilih Gender")
-//                radio_JK.requestFocus()
-            } else if (edit_phone1.text!!.isEmpty()){
-                edit_phone1.error = "Kolom Tidak Boleh Kosong"
-                edit_phone1.requestFocus()
-            } else if (edit_Password.text!!.isEmpty()){
-                edit_Password.error = "Kolom Tidak Boleh Kosong"
-                edit_Password.requestFocus()
-            } else if (edit_Passwordconfirm.text!!.isEmpty()){
-                edit_Passwordconfirm.error = "Kolom Tidak Boleh Kosong"
-                edit_Passwordconfirm.requestFocus()
+            val radioID = radio_JK.checkedRadioButtonId
+            val radiobutton = findViewById<RadioButton>(radioID)
+            gender = radiobutton.text.toString()
+
+            if (edit_textNik.text!!.isEmpty()) {
+                showError("Kolom NIK tidak boleh kosong !")
+            } else if (edit_textName.text!!.isEmpty()) {
+                showError("Kolom nama tidak boleh kosong !")
+            } else if (Constant.LATITUDE == "") {
+                showError("Pilih Lokasi !")
+            } else if (gender == null) {
+                showError("Pilih gender")
+                radio_JK.requestFocus()
+            } else if (edit_phone1.text!!.isEmpty()) {
+                showError("Kolom telepon tidak boleh kosong !")
+            } else if (edit_Password.text!!.isEmpty()) {
+                showError("Kolom password tidak boleh kosong !")
+            } else if (edit_Passwordconfirm.text!!.isEmpty()) {
+                showError("Kolom password konfirmasi tidak boleh kosong !")
             } else
-                presenter.insertregister(edit_textNik.text.toString(), edit_textName.text.toString(), edit_phone1.text.toString(), radio_JK.checkedRadioButtonId.toString(), Constant.LATITUDE, Constant.LONGITUDE,tv_alamat1.text.toString(), edit_Password.text.toString(), edit_Passwordconfirm.text.toString())
+                presenter.insertregister(
+                    edit_textNik.text.toString(),
+                    edit_textName.text.toString(),
+                    edit_phone1.text.toString(),
+                    gender!!,
+                    Constant.LATITUDE,
+                    Constant.LONGITUDE,
+                    tv_alamat1.text.toString(),
+                    edit_Password.text.toString(),
+                    edit_Passwordconfirm.text.toString()
+                )
         }
     }
 
-    override fun onLoading(loading: Boolean) {
+    override fun onLoading(loading: Boolean, message: String?) {
         when (loading) {
             true -> {
-                progressregis.visibility = View.VISIBLE
-                btn_register.visibility = View.GONE
+                sLoading.setContentText(message).show()
             }
             false -> {
-                progressregis.visibility = View.GONE
-                btn_register.visibility = View.VISIBLE
+                sLoading.dismiss()
             }
         }
     }
 
     override fun onResult(responseUser: ResponseUser) {
-        if (responseUser.status == true) {
-//            responseUser.user
-            showMessage(responseUser.message)
-            startActivity(Intent(this, LoginActivity::class.java))
-        }else{
-            showMessage(responseUser.message)
+        if (responseUser.status) {
+            showSuccesOk(responseUser.message)
+        } else {
+            showError(responseUser.message)
         }
     }
 
-    override fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    override fun showSuccesOk(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setConfirmText("OK")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                finish()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }.show()
+    }
+
+    override fun showSucces(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setTitleText("Ok")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }.show()
+    }
+
+    override fun showError(message: String) {
+        sError
+            .setContentText(message)
+            .setConfirmText("Gagal")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+    }
+
+    override fun showAlert(message: String) {
+        sAlert
+            .setContentText(message)
+            .setTitleText("Ya")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }
+            .setTitleText("Nanti")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+        sAlert.setCancelable(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {

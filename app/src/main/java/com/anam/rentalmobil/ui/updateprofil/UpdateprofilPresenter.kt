@@ -63,7 +63,7 @@ class UpdateprofilPresenter (val view: UpdateprofilContract.View) : Updateprofil
                 "", requestBody)
         }
 
-        view.onLoading(true)
+        view.onLoading(true, "Loading..")
         ApiService.endpoint.Updateuser(id, nik, nama, telp, gender, latitude, longitude, alamat, multipartBody ) .enqueue(object : Callback<ResponseUser> {
             override fun onResponse(
                 call: Call<ResponseUser>,

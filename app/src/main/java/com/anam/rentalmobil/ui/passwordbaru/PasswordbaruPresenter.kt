@@ -17,7 +17,7 @@ class PasswordbaruPresenter (val view: PasswordbaruContract.View) : Passwordbaru
     }
 
     override fun passwordbaru(id: Long, password: String, password_confirmation: String) {
-        view.onLoading(true)
+        view.onLoading(true, "Loading..")
         ApiService.endpoint.Passwordbaru(id, password, password_confirmation).enqueue(object : Callback<ResponseUser>{
             override fun onResponse(call: Call<ResponseUser>, response: Response<ResponseUser>) {
                 view.onLoading(false)

@@ -1,6 +1,5 @@
 package com.anam.rentalmobil.ui.invoice
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.print.PrintAttributes
@@ -11,18 +10,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import com.anam.rentalmobil.R
-import com.anam.rentalmobil.data.database.PrefsManager
 import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksi
-import com.anam.rentalmobil.data.model.user.ResponseUser
-import com.anam.rentalmobil.ui.a_FRAGMENT.FragmenttActivity
-import com.anam.rentalmobil.ui.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_invoice.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 class InvoiceActivity : AppCompatActivity(), InvoiceContract.View {
 

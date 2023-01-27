@@ -98,7 +98,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.a_FRAGMENT.FragmenttActivity"
+            android:name=".ui.fragment.UserActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -115,9 +115,9 @@
         <activity android:name=".ui.passwordbaru.PasswordbaruActivity" />
         <activity android:name=".ui.updateprofil.UpdateprofilActivity" />
         <activity android:name=".ui.maps.MapsActivity" />
-        <activity android:name=".ui.a_FRAGMENT.fragment.detailproduk.DetailprodukActivity" />
+        <activity android:name=".ui.fragment.fragment.detailproduk.DetailprodukActivity" />
         <activity android:name=".ui.booking.BookingActivity" />
-        <activity android:name=".ui.a_FRAGMENT.fragment.notifications.detailtransaksi.DetailtransaksiActivity" />
+        <activity android:name=".ui.fragment.fragment.notifications.detailtransaksi.DetailtransaksiActivity" />
         <activity android:name=".ui.invoice.InvoiceActivity" />
     </application>
 

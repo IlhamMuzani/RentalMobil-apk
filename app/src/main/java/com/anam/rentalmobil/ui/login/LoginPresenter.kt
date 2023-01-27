@@ -8,25 +8,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginPresenter (val view: LoginContract.View) : LoginContract.Presenter {
+class LoginPresenter(val view: LoginContract.View) : LoginContract.Presenter {
 
     init {
         view.initActivity()
         view.initListener()
         view.onLoading(false)
     }
+
     override fun doLogin(telp: String, password: String) {
-        view.onLoading(true)
-        ApiService.endpoint.login(telp, password).enqueue(object : Callback<ResponseUser>{
+        view.onLoading(true, "Loading..")
+        ApiService.endpoint.login(telp, password).enqueue(object : Callback<ResponseUser> {
             override fun onResponse(call: Call<ResponseUser>, response: Response<ResponseUser>) {
                 view.onLoading(false)
-                if (response.isSuccessful){
-                    val responseUser: ResponseUser?= response.body()
-                    view.showMessage(responseUser!!.message)
-
-                    if (responseUser!!.status) {
-                        view.onResult(responseUser)
-                    }
+                if (response.isSuccessful) {
+                    val responseUser: ResponseUser? = response.body()
+                    view.onResult(responseUser!!)
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.anam.rentalmobil.ui.passwordbaru
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,8 @@ import android.widget.Toast
 import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.user.ResponseUser
+import com.anam.rentalmobil.ui.fragment.UserActivity
+import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_passwordbaru.*
 import kotlinx.android.synthetic.main.activity_updateprofil.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -15,6 +18,11 @@ class PasswordbaruActivity : AppCompatActivity(), PasswordbaruContract.View {
 
     lateinit var presenter: PasswordbaruPresenter
 
+    private lateinit var sLoading: SweetAlertDialog
+    private lateinit var sSuccess: SweetAlertDialog
+    private lateinit var sError: SweetAlertDialog
+    private lateinit var sAlert: SweetAlertDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_passwordbaru)
@@ -22,6 +30,12 @@ class PasswordbaruActivity : AppCompatActivity(), PasswordbaruContract.View {
     }
 
     override fun initActivity() {
+
+        sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
+        sError = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal !")
+        sAlert = SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Peringatan !")
+
 
         tv_nama.text ="Ubah Password"
     }
@@ -34,40 +48,79 @@ class PasswordbaruActivity : AppCompatActivity(), PasswordbaruContract.View {
 
         btn_passworbaru.setOnClickListener {
             if (edit_ubahtextPassword.text!!.isEmpty()){
-                edit_ubahtextPassword.error = "Masukkan Password"
-                edit_ubahtextPassword.requestFocus()
+                showError("Masukkan Password")
             } else if (edit_ubahkonfirmasiPassword.text!!.isEmpty()){
-                edit_ubahkonfirmasiPassword.error = "Masukkan Password Konfirmasi"
-                edit_ubahkonfirmasiPassword.requestFocus()
+              showError("Masukkan Konfirmasi Password")
             }
                 presenter.passwordbaru(Constant.USER_ID, edit_ubahtextPassword.text.toString(), edit_ubahkonfirmasiPassword.text.toString())
         }
     }
 
-    override fun onLoading(loading: Boolean) {
+    override fun onLoading(loading: Boolean, message: String?) {
         when (loading) {
             true -> {
-                progresspasswordbaru.visibility = View.VISIBLE
-                btn_passworbaru.visibility = View.GONE
+                sLoading.setContentText(message).show()
             }
             false -> {
-                progresspasswordbaru.visibility = View.GONE
-                btn_passworbaru.visibility = View.VISIBLE
+                sLoading.dismiss()
             }
         }
     }
 
     override fun onResult(responseUser: ResponseUser) {
-        showMessage(responseUser.message)
-        finish()
-    }
-
-    override fun showMessage(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+        if (responseUser.status) {
+            showSucces(responseUser.message)
+        }else{
+            showError(responseUser.message)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    override fun showSuccesOk(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setConfirmText("OK")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                finish()
+                startActivity(Intent(this, UserActivity::class.java))
+            }
+            .show()
+    }
+
+    override fun showSucces(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setConfirmText("Ok")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }.show()
+    }
+
+    override fun showError(message: String) {
+        sError
+            .setContentText(message)
+            .setConfirmText("OK")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+    }
+
+    override fun showAlert(message: String) {
+        sAlert
+            .setContentText(message)
+            .setConfirmText("Ya")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }
+            .setConfirmText("Nanti")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+        sAlert.setCancelable(true)
     }
 }

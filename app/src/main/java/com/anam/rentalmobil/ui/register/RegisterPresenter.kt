@@ -27,7 +27,7 @@ class RegisterPresenter (val view: RegisterContract.View) : RegisterContract.Pre
         password: String,
         password_confirmation: String
     ) {
-        view.onLoading(true)
+        view.onLoading(true, "Loading..")
         ApiService.endpoint.register(nik, nama, telp, gender, latitude, longitude, alamat, password, password_confirmation).enqueue(object: Callback<ResponseUser>{
             override fun onResponse(call: Call<ResponseUser>, response: Response<ResponseUser>) {
                 view.onLoading(false)

@@ -22,12 +22,13 @@ interface BookingContract {
     interface View {
         fun initActivity()
         fun initListener()
-        fun onLoading(loading: Boolean)
+        fun onLoading(loading: Boolean, message: String? = "Loading..")
         fun onResult(responseBookingInsert: ResponseBookingInsert)
-//        fun onResultrevel(responseBookingInsert: ResponseBookingInsert)
-//        fun onResultSopir(responseSopirList: ResponseSopirList)
+        fun showSuccessOK(message: String)
+        fun showSuccess(message: String)
+        fun showError(message: String)
+        fun showAlert(message: String)
         fun onShowdialogkonfirmasi()
         fun onResultdetail(responseProduk: ResponseProduk)
-        fun showMessage(message: String)
     }
 }

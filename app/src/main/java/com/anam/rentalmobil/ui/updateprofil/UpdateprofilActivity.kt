@@ -14,7 +14,9 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.user.DataUser
 import com.anam.rentalmobil.data.model.user.ResponseUser
 import com.anam.rentalmobil.data.model.user.ResponseUserdetail
+import com.anam.rentalmobil.ui.login.LoginActivity
 import com.anam.rentalmobil.ui.maps.MapsActivity
+import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import com.anam.rentalmobil.ui.utils.FileUtils
 import com.anam.rentalmobil.ui.utils.GlideHelper
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +36,11 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
     lateinit var telp: String
     lateinit var user: DataUser
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+
+    lateinit var sLoading: SweetAlertDialog
+    lateinit var sError: SweetAlertDialog
+    lateinit var sSuccess: SweetAlertDialog
+    lateinit var sAlert: SweetAlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +65,11 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
     override fun initActivity() {
 
         tv_nama.text ="Register"
+
+        sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
+        sError = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
+        sAlert = SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE).setTitleText("Peringatan !")
 
     }
 
@@ -97,15 +109,13 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
         }
     }
 
-    override fun onLoading(loading: Boolean) {
+    override fun onLoading(loading: Boolean, message: String?) {
         when (loading) {
             true -> {
-                progressubah.visibility = View.VISIBLE
-                btn_ubahprofil.visibility = View.GONE
+                sLoading.setContentText(message).show()
             }
             false -> {
-                progressubah.visibility = View.GONE
-                btn_ubahprofil.visibility = View.VISIBLE
+                sLoading.dismiss()
             }
         }
     }
@@ -144,16 +154,11 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
                 Constant.USER_ID = user.id!!.toLong()
                 startPhoneNumberVerification("+62$telp")
             }else {
-                showMessage(responseUser.message)
-                finish()
+                showSuccesOk(responseUser.message)
             }
         }else{
-            showMessage(responseUser.message)
+            showError(responseUser.message)
         }
-    }
-
-    override fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -179,5 +184,48 @@ class UpdateprofilActivity : AppCompatActivity(), UpdateprofilContract.View {
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
+
+    override fun showSuccesOk(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setConfirmText("OK")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+                finish()
+            }.show()
+    }
+
+    override fun showSucces(message: String) {
+        sSuccess
+            .setContentText(message)
+            .setTitleText("Ok")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }.show()
+    }
+
+    override fun showError(message: String) {
+        sError
+            .setContentText(message)
+            .setConfirmText("Gagal")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+    }
+
+    override fun showAlert(message: String) {
+        sAlert
+            .setContentText(message)
+            .setTitleText("Ya")
+            .setConfirmClickListener {
+                it.dismissWithAnimation()
+            }
+            .setTitleText("Nanti")
+            .setConfirmClickListener {
+                it.dismiss()
+            }.show()
+        sAlert.setCancelable(true)
+    }
+
 
 }

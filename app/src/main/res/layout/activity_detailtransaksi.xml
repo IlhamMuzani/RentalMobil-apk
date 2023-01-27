@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.a_FRAGMENT.fragment.detailproduk.DetailprodukActivity">
+    tools:context=".ui.fragment.fragment.detailproduk.DetailprodukActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,11 +52,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_200sdp"
                             android:src="@drawable/img_no_image"/>
-
-                        <ProgressBar
-                            android:id="@+id/progressdetail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
