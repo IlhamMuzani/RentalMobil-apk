@@ -81,13 +81,7 @@ dependencies {
 
     implementation 'hu.autsoft:krate:0.3.0'
     implementation 'com.makeramen:roundedimageview:2.2.1'
-
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.thomper:sweet-alert-dialog:1.4.0'
-
-    //Cetak PDF
-//    implementation 'com.itextpdf:itextg:5.5.10'
-//    implementation 'com.karumi:dexter:4.2.0'
-//    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
-
 
 }

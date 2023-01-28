@@ -120,7 +120,7 @@ interface ApiEndpoint {
         @Path("kd_user") kd_user: Long
     ): Call<ResponseTransaksiList>
 
-    @DELETE("transaksi/{id}")
+    @POST("transaksi-delete/{id}")
     fun deletetransaksi(
         @Path("id") id: Long
     ): Call<ResponseTransaksiUpdate>

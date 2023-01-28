@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.anam.rentalmobil.ui.passwordbaru.PasswordbaruActivity
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import com.anam.rentalmobil.ui.syarat.SyaratActivity
 import com.anam.rentalmobil.ui.updateprofil.UpdateprofilActivity
+import com.anam.rentalmobil.ui.utils.GlideHelper
 import com.anam.rentalmobil.ui.utils.MapsHelper
 
 class AkunFragment : Fragment(), AkunContract.View {
@@ -29,6 +31,7 @@ class AkunFragment : Fragment(), AkunContract.View {
     lateinit var BtnTentang : RelativeLayout
     lateinit var Btnpasswordbaru : RelativeLayout
     lateinit var txvNama : TextView
+    lateinit var imvGambar : ImageView
     lateinit var txvNIK : TextView
     lateinit var TxvAlamat : TextView
     lateinit var Txvphone : TextView
@@ -70,6 +73,7 @@ class AkunFragment : Fragment(), AkunContract.View {
         BtnTentang = view.findViewById(R.id.btn_tentang)
         Btnpasswordbaru = view.findViewById(R.id.btn_ubahPassword)
         txvNama= view.findViewById(R.id.txv_nama)
+        imvGambar = view.findViewById(R.id.imvgambar)
         txvNIK = view.findViewById(R.id.txvNIK)
 //        TxvAlamat = view.findViewById(R.id.txvAlamat)
         Txvphone = view.findViewById(R.id.txvPhone)
@@ -121,6 +125,7 @@ class AkunFragment : Fragment(), AkunContract.View {
         txvNama.setText(akun!!.nama)
         txvNIK.setText(akun!!.nik)
         Txvphone.setText(akun!!.telp)
+        GlideHelper.setImage(requireActivity(), Constant.IP_IMAGE + akun!!.foto, imvGambar)
         if (responseUserdetail.user.gender == "P"){
             TxvGenderperempuan.visibility = View.VISIBLE
             TxvGenderlakilaki.visibility = View.GONE

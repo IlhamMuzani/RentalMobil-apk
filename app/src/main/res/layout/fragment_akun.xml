@@ -20,12 +20,12 @@
             android:background="@color/white"
             >
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imvgambar"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:src="@drawable/profiluser2" />
+                android:src="@drawable/img_no_image" />
 
 
                 <TextView
