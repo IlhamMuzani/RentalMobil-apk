@@ -64,16 +64,63 @@
         <LinearLayout
             android:id="@+id/layoutdatatidakada"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_btn_lapisanhijau"
-            android:gravity="center"
-            android:visibility="gone">
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/gambarkosong"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/datakosong"
+                app:riv_corner_radius="@dimen/_8sdp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
                 android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Data Tidak Ada !!" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutkosongLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_btn_lapisanhijau"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/gambarkosonglogin"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/logindulu"
+                app:riv_corner_radius="@dimen/_8sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Silakan login terlebih dahulu ya" />
         </LinearLayout>
 
     </LinearLayout>

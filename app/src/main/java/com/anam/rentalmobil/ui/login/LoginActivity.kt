@@ -8,6 +8,7 @@ import com.anam.rentalmobil.data.database.PrefsManager
 import com.anam.rentalmobil.data.model.user.DataUser
 import com.anam.rentalmobil.data.model.user.ResponseUser
 import com.anam.rentalmobil.ui.fragment.UserActivity
+import com.anam.rentalmobil.ui.checkUser.CheckUserActivity
 import com.anam.rentalmobil.ui.register.RegisterActivity
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 import kotlinx.android.synthetic.main.activity_login.*
@@ -62,6 +63,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         txv_dummy.setOnClickListener {
             dummy()
+        }
+
+        txtlupapassword.setOnClickListener {
+            startActivity(Intent(this, CheckUserActivity::class.java))
         }
     }
 

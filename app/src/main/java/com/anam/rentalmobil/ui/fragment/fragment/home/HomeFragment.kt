@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         RcvProduk = view.findViewById(R.id.rcvProduk)
         Swipe = view.findViewById(R.id.swipe)
         EditSearch = view.findViewById(R.id.edtSearch)
-        imvKategori = view.findViewById(R.id.imvkategori)
+//        imvKategori = view.findViewById(R.id.imvkategori)
 
         produkAdapter = ProdukAdapter(requireActivity(), arrayListOf()){
             dataProduk: DataProduk, position: Int, type: String ->
@@ -102,7 +102,14 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     }
 
-    override fun onLoading(loading: Boolean, message: String?) {
+    override fun onLoading(loading: Boolean) {
+        when(loading){
+            true -> Swipe.isRefreshing = true
+            false -> Swipe.isRefreshing = false
+        }
+    }
+
+    override fun onLoadingswet(loading: Boolean, message: String?) {
         when (loading){
             true -> sLoading.setTitleText(message).show()
             false -> sLoading.dismiss()

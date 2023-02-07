@@ -1,11 +1,13 @@
 package com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.menunggu
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
+import com.anam.rentalmobil.ui.daftar.DaftarActivity
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
 
 class MenungguFragment : Fragment(), MenungguContract.View {
@@ -29,8 +32,10 @@ class MenungguFragment : Fragment(), MenungguContract.View {
     lateinit var layoutdatakosong: LinearLayout
     lateinit var rcvMenunggu: RecyclerView
     lateinit var swipeMenunggu: SwipeRefreshLayout
-    lateinit var lin_refresh: LinearLayout
     lateinit var  liner_refresh : LinearLayout
+    lateinit var layoutbelumlogin : LinearLayout
+    lateinit var gambarKosong : ImageView
+    lateinit var logindulu : ImageView
 
     lateinit var sLoading: SweetAlertDialog
     lateinit var sAlert: SweetAlertDialog
@@ -57,7 +62,9 @@ class MenungguFragment : Fragment(), MenungguContract.View {
         if (prefsManager.prefIsLogin) {
             presenter.getStatusmenunggu(prefsManager.prefsId.toLong())
             liner_refresh.visibility = View.VISIBLE
+            layoutbelumlogin.visibility = View.GONE
         }else{
+            layoutbelumlogin.visibility = View.VISIBLE
             liner_refresh.visibility = View.GONE
         }
     }
@@ -71,8 +78,10 @@ class MenungguFragment : Fragment(), MenungguContract.View {
         rcvMenunggu = view.findViewById(R.id.rcvMenunggu)
         swipeMenunggu = view.findViewById(R.id.swipeMenunggu)
         layoutdatakosong = view.findViewById(R.id.layoutdatatidakada)
-        lin_refresh = view.findViewById(R.id.lin_refresh)
         liner_refresh = view.findViewById(R.id.liner_refresh)
+        gambarKosong = view.findViewById(R.id.gambarkosong)
+        logindulu = view.findViewById(R.id.gambarkosonglogin)
+        layoutbelumlogin = view.findViewById(R.id.layoutkosongLogin)
 
         menungguAdapter = MenungguAdapter(
             requireActivity(),
@@ -97,11 +106,19 @@ class MenungguFragment : Fragment(), MenungguContract.View {
             }
         }
 
-        lin_refresh.setOnClickListener {
+        liner_refresh.setOnClickListener {
             if (prefsManager.prefIsLogin) {
                 showSuccess("")
                 presenter.getStatusmenunggu(prefsManager.prefsId.toLong())
             }
+        }
+
+        gambarKosong.setOnClickListener {
+            showError("Data Tidak Ada !!")
+        }
+
+        logindulu.setOnClickListener {
+            startActivity(Intent(requireActivity(), DaftarActivity::class.java))
         }
     }
 
@@ -120,15 +137,14 @@ class MenungguFragment : Fragment(), MenungguContract.View {
     }
 
     override fun onResult(responseTransaksiList: ResponseTransaksiList) {
-        if (responseTransaksiList.dataTransaksi != null) {
+        if (responseTransaksiList.status) {
             val transaksi: List<DataTransaksi> = responseTransaksiList.dataTransaksi
             menungguAdapter.setData(transaksi)
-
             layoutdatakosong.visibility = View.GONE
-        } else {
+            rcvMenunggu.visibility = View.VISIBLE
+        }else{
             layoutdatakosong.visibility = View.VISIBLE
             rcvMenunggu.visibility = View.GONE
-
         }
     }
 

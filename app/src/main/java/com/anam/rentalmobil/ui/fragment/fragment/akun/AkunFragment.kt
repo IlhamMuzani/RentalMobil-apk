@@ -26,18 +26,17 @@ class AkunFragment : Fragment(), AkunContract.View {
     lateinit var prefsManager: PrefsManager
     lateinit var presenter: AkunPresenter
 
-    lateinit var BtnUbahProfil : RelativeLayout
-    lateinit var Btnsyarat : RelativeLayout
-    lateinit var BtnTentang : RelativeLayout
-    lateinit var Btnpasswordbaru : RelativeLayout
-    lateinit var txvNama : TextView
-    lateinit var imvGambar : ImageView
-    lateinit var txvNIK : TextView
-    lateinit var TxvAlamat : TextView
-    lateinit var Txvphone : TextView
-    lateinit var TxvGenderlakilaki : TextView
-    lateinit var TxvGenderperempuan : TextView
-    lateinit var TxvLogout : TextView
+    lateinit var BtnUbahProfil: RelativeLayout
+    lateinit var Btnsyarat: RelativeLayout
+    lateinit var Btnpasswordbaru: RelativeLayout
+    lateinit var txvNama: TextView
+    lateinit var imvGambar: ImageView
+    lateinit var txvNIK: TextView
+    lateinit var TxvAlamat: TextView
+    lateinit var Txvphone: TextView
+    lateinit var TxvGenderlakilaki: TextView
+    lateinit var TxvGenderperempuan: TextView
+    lateinit var TxvLogout: TextView
 
     lateinit var sLoading: SweetAlertDialog
     lateinit var sAlert: SweetAlertDialog
@@ -63,16 +62,22 @@ class AkunFragment : Fragment(), AkunContract.View {
 
     override fun initFragment(view: View) {
         sLoading = SweetAlertDialog(requireActivity(), SweetAlertDialog.PROGRESS_TYPE)
-        sSuccess = SweetAlertDialog(requireActivity(), SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
-        sError = SweetAlertDialog(requireActivity(), SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
-        sAlert = SweetAlertDialog(requireActivity(), SweetAlertDialog.WARNING_TYPE).setTitleText("Perhatian!")
+        sSuccess = SweetAlertDialog(
+            requireActivity(),
+            SweetAlertDialog.SUCCESS_TYPE
+        ).setTitleText("Berhasil")
+        sError =
+            SweetAlertDialog(requireActivity(), SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
+        sAlert = SweetAlertDialog(
+            requireActivity(),
+            SweetAlertDialog.WARNING_TYPE
+        ).setTitleText("Perhatian!")
 
         MapsHelper.permissionMap(requireContext(), requireActivity())
         BtnUbahProfil = view.findViewById(R.id.btn_ubahProfil)
         Btnsyarat = view.findViewById(R.id.btn_syarat)
-        BtnTentang = view.findViewById(R.id.btn_tentang)
         Btnpasswordbaru = view.findViewById(R.id.btn_ubahPassword)
-        txvNama= view.findViewById(R.id.txv_nama)
+        txvNama = view.findViewById(R.id.txv_nama)
         imvGambar = view.findViewById(R.id.imvgambar)
         txvNIK = view.findViewById(R.id.txvNIK)
 //        TxvAlamat = view.findViewById(R.id.txvAlamat)
@@ -82,16 +87,12 @@ class AkunFragment : Fragment(), AkunContract.View {
         TxvLogout = view.findViewById(R.id.txvLogout)
 
 
-        BtnUbahProfil.setOnClickListener{
+        BtnUbahProfil.setOnClickListener {
             Constant.USER_ID = prefsManager.prefsId.toLong()
             startActivity(Intent(requireActivity(), UpdateprofilActivity::class.java))
         }
 
         Btnsyarat.setOnClickListener {
-            startActivity(Intent(requireActivity(), SyaratActivity::class.java))
-        }
-
-        BtnTentang.setOnClickListener {
             startActivity(Intent(requireActivity(), SyaratActivity::class.java))
         }
 
@@ -117,7 +118,7 @@ class AkunFragment : Fragment(), AkunContract.View {
     }
 
     override fun onResultLogout() {
-    showSuccessOk("Berhasil Logout")
+        showSuccessOk("Berhasil Logout")
     }
 
     override fun onResult(responseUserdetail: ResponseUserdetail) {
@@ -126,10 +127,10 @@ class AkunFragment : Fragment(), AkunContract.View {
         txvNIK.setText(akun!!.nik)
         Txvphone.setText(akun!!.telp)
         GlideHelper.setImage(requireActivity(), Constant.IP_IMAGE + akun!!.foto, imvGambar)
-        if (responseUserdetail.user.gender == "P"){
+        if (responseUserdetail.user.gender == "P") {
             TxvGenderperempuan.visibility = View.VISIBLE
             TxvGenderlakilaki.visibility = View.GONE
-        }else{
+        } else {
             TxvGenderlakilaki.visibility = View.VISIBLE
             TxvGenderperempuan.visibility = View.GONE
         }

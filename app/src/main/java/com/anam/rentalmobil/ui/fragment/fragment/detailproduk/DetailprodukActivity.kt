@@ -11,6 +11,7 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.produk.DataProduk
 import com.anam.rentalmobil.data.model.produk.ResponseProduk
 import com.anam.rentalmobil.ui.booking.BookingActivity
+import com.anam.rentalmobil.ui.daftar.DaftarActivity
 import com.anam.rentalmobil.ui.fragment.UserActivity
 import com.anam.rentalmobil.ui.login.LoginActivity
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
@@ -44,7 +45,7 @@ class DetailprodukActivity : AppCompatActivity(), DetailprodukContract.View {
     }
 
     override fun initActivity() {
-        tv_nama.text ="Detail Mobil"
+        tv_nama.text = "Detail Mobil"
 
         sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
         sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
@@ -58,11 +59,11 @@ class DetailprodukActivity : AppCompatActivity(), DetailprodukContract.View {
         }
 
         btnbooking.setOnClickListener {
-            if (prefsManager.prefIsLogin){
+            if (prefsManager.prefIsLogin) {
                 Constant.PRODUK_ID = produk.id!!
                 startActivity(Intent(this, BookingActivity::class.java))
-            }else {
-                startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                startActivity(Intent(this, DaftarActivity::class.java))
             }
         }
 
@@ -82,14 +83,31 @@ class DetailprodukActivity : AppCompatActivity(), DetailprodukContract.View {
     override fun onResult(responseProduk: ResponseProduk) {
         produk = responseProduk.dataproduk!!
 
-        GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + produk.mobil.gambar!!, imvgambardetail)
+        GlideHelper.setImage(
+            applicationContext,
+            Constant.IP_IMAGE + produk.mobil.gambar!!,
+            imvgambardetail
+        )
         txvnama.text = produk.mobil.nama
         txvwarna.text = produk.mobil.warna
         txvtahun.text = produk.mobil.tahun
         txvkapasitas.text = produk.mobil.kapasitas
         txvfasilitas.text = produk.mobil.fasilitas
         txvplat.text = produk.mobil.plat
-        id_sewa.text = NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(Integer.valueOf(produk.sewa))
+        id_sewa.text = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+            .format(Integer.valueOf(produk.sewa))
+        if (produk.kategori == "tour") {
+            layout_kategori.visibility = View.VISIBLE
+            if (produk.area == "luar") {
+                txvarea.visibility = View.VISIBLE
+                txvdalamkota.visibility = View.GONE
+            } else {
+                txvarea.visibility = View.GONE
+                txvdalamkota.visibility = View.VISIBLE
+            }
+        } else {
+            layout_kategori.visibility = View.GONE
+        }
     }
 
     override fun showSuccessOK(message: String) {

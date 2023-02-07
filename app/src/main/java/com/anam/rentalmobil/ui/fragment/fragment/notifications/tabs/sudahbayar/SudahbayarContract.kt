@@ -1,6 +1,7 @@
 package com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.sudahbayar
 
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
+import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
 

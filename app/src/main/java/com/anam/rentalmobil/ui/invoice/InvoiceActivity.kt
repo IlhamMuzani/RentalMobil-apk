@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.anam.rentalmobil.R
 import com.anam.rentalmobil.data.model.Constant
+import com.anam.rentalmobil.data.model.Constant.Companion.IP
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksi
 import kotlinx.android.synthetic.main.activity_invoice.*
@@ -67,7 +68,7 @@ class InvoiceActivity : AppCompatActivity(), InvoiceContract.View {
                 btnprint.setVisibility(View.VISIBLE)
             }
         }
-        webView!!.loadUrl("https://travel.ufomediategal.com/api/transaksi-invoice/" + Constant.TRANSAKSI_ID)
+        webView!!.loadUrl(IP + "api/transaksi-invoice/" + Constant.TRANSAKSI_ID)
 
     }
 

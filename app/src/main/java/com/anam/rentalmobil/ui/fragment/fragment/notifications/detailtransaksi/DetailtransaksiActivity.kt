@@ -24,6 +24,7 @@ import com.anam.rentalmobil.ui.utils.FileUtils
 import com.anam.rentalmobil.ui.utils.GlideHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.lazday.poslaravel.util.GalleryHelper
+import kotlinx.android.synthetic.main.activity_detailproduk.*
 import kotlinx.android.synthetic.main.activity_detailproduk.imvgambardetail
 import kotlinx.android.synthetic.main.activity_detailtransaksi.*
 import kotlinx.android.synthetic.main.dialog_bukti.view.*
@@ -203,10 +204,27 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
         txvlamapesanan.text = transaksi.lama
         txvhargasewa.text = NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(Integer.valueOf(transaksi.harga))
 
+        if (transaksi.produk.kategori == "tour") {
+            layoutkategoritrans.visibility = View.VISIBLE
+            if (transaksi.produk.area == "luar") {
+                txvareadalamkota.visibility = View.VISIBLE
+                txvarealuarkota.visibility = View.GONE
+            } else {
+                txvareadalamkota.visibility = View.GONE
+                txvarealuarkota.visibility = View.VISIBLE
+            }
+        } else {
+            layoutkategoritrans.visibility = View.GONE
+        }
+
         if(transaksi.bukti.isNullOrEmpty()){
                 layout_bukti.visibility = View.GONE
                 btninvoice.visibility = View.GONE
         }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "menunggu"){
+            layout_bukti.visibility = View.GONE
+            btninvoice.visibility = View.GONE
+            btnuploadbukti.visibility = View.GONE
+        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "proses"){
                 layout_bukti.visibility = View.VISIBLE
                 btnuploadbukti.visibility = View.GONE
                 GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + transaksi.bukti!!, imvbukti)

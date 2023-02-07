@@ -26,6 +26,20 @@
         android:theme="@style/Theme.RentalMobil"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".KonfirmasiphoneActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MasukanphoneActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -119,6 +133,7 @@
         <activity android:name=".ui.booking.BookingActivity" />
         <activity android:name=".ui.fragment.fragment.notifications.detailtransaksi.DetailtransaksiActivity" />
         <activity android:name=".ui.invoice.InvoiceActivity" />
+        <activity android:name=".ui.checkUser.CheckUserActivity" />
     </application>
 
 </manifest>

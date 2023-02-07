@@ -3,8 +3,8 @@ package com.anam.rentalmobil.data.model
 class Constant {
     companion object {
 
-//        var IP: String = "http://192.168.1.43/binamurid/"
-        var IP: String = "https://travel.ufomediategal.com/"
+        var IP: String = "http://192.168.1.174/travel/"
+//        var IP: String = "https://travel.ufomediategal.com/"
         var IP_IMAGE: String = IP + "public/storage/uploads/"
 
         var LATITUDE: String = ""

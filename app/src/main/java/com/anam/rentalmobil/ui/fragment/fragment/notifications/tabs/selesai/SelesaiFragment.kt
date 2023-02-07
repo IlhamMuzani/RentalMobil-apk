@@ -1,11 +1,13 @@
 package com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.selesai
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,10 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
+import com.anam.rentalmobil.ui.daftar.DaftarActivity
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
+import kotlinx.android.synthetic.main.fragment_menunggu.*
+import kotlinx.android.synthetic.main.fragment_sudahbayar.*
 
 class SelesaiFragment : Fragment(), SelesaiContract.View {
 
@@ -29,6 +34,10 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
     lateinit var rcvSelesai: RecyclerView
     lateinit var swipeSelesai: SwipeRefreshLayout
     lateinit var layoutkosong: LinearLayout
+    lateinit var lin_refresh: LinearLayout
+    lateinit var gambarKosong: ImageView
+    lateinit var logindulu: ImageView
+    lateinit var layoutkosonglogin: LinearLayout
 
     lateinit var sLoading: SweetAlertDialog
     lateinit var sAlert: SweetAlertDialog
@@ -54,6 +63,11 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
         super.onStart()
         if (prefsManager.prefIsLogin) {
             presenter.getSelesai(prefsManager.prefsId.toLong())
+            lin_refresh.visibility = View.VISIBLE
+            layoutkosonglogin.visibility = View.GONE
+        }else{
+            lin_refresh.visibility = View.GONE
+            layoutkosonglogin.visibility = View.VISIBLE
         }
     }
 
@@ -66,6 +80,11 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
         rcvSelesai = view.findViewById(R.id.rcvSelesai)
         swipeSelesai = view.findViewById(R.id.swipeSelesai)
         layoutkosong = view.findViewById(R.id.layoutdatakosongselesai)
+        lin_refresh = view.findViewById(R.id.lin_refreshselesai)
+        gambarKosong = view.findViewById(R.id.gambardatakosong3)
+        logindulu = view.findViewById(R.id.gambarkosonglogin3)
+        layoutkosonglogin = view.findViewById(R.id.layoutkosongLogin3)
+
 
         selesaiAdapter = SelesaiAdapter(
             requireActivity(),
@@ -84,10 +103,25 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
             adapter = selesaiAdapter
         }
 
+        lin_refresh.setOnClickListener {
+            if (prefsManager.prefIsLogin) {
+                showSuccess("")
+                presenter.getSelesai(prefsManager.prefsId.toLong())
+            }
+        }
+
         swipeSelesai.setOnRefreshListener {
             if (prefsManager.prefIsLogin) {
                 presenter.getSelesai(prefsManager.prefsId.toLong())
             }
+        }
+
+        gambarKosong.setOnClickListener {
+            showError("Data Tidak Ada !!")
+        }
+
+        logindulu.setOnClickListener {
+            startActivity(Intent(requireActivity(), DaftarActivity::class.java))
         }
     }
 
@@ -109,9 +143,9 @@ class SelesaiFragment : Fragment(), SelesaiContract.View {
         if (responseTransaksiList.status) {
             val transaksi: List<DataTransaksi> = responseTransaksiList.dataTransaksi
             selesaiAdapter.setData(transaksi)
-
             layoutkosong.visibility = View.GONE
-        } else {
+            rcvSelesai.visibility = View.VISIBLE
+        }else{
             layoutkosong.visibility = View.VISIBLE
             rcvSelesai.visibility = View.GONE
         }

@@ -64,6 +64,12 @@ interface ApiEndpoint {
         @Query("password_confirmation") password_confirmation: String,
     ): Call<ResponseUser>
 
+    @POST("user/check_user")
+    fun check_user(
+        @Query("nik") nik: String,
+        @Query("telp") telp: String,
+    ): Call<ResponseUser>
+
     @GET("produk-list")
     fun getproduk(
     ): Call<ResponseProdukList>

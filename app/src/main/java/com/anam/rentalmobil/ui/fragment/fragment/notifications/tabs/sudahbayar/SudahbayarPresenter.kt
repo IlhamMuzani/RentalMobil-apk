@@ -1,5 +1,6 @@
 package com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.sudahbayar
 
+import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
 import com.anam.rentalmobil.network.ApiService
@@ -33,7 +34,6 @@ class SudahbayarPresenter (var view: SudahbayarContract.View) : SudahbayarContra
 
         })
     }
-
     override fun deletetransaksi(id: Long) {
         view.onloading(true)
         view.onloadingswet(true, "Loading..")

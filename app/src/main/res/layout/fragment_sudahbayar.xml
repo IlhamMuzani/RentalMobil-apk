@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Sudah Bayar"
+                android:text="Status"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -45,8 +45,8 @@
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
                         android:layout_gravity="end"
-                        android:backgroundTint="@color/white"
-                        android:background="@drawable/ic_baseline_refresh_24"/>
+                        android:background="@drawable/ic_baseline_refresh_24"
+                        android:backgroundTint="@color/white" />
 
                 </LinearLayout>
 
@@ -63,16 +63,63 @@
         <LinearLayout
             android:id="@+id/layoutdatakosong"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical"
             android:visibility="gone"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_btn_lapisanhijau"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/gambardatakosong2"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/datakosong"
+                app:riv_corner_radius="@dimen/_8sdp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
                 android:gravity="center"
-                android:text="Data Tidak Ada !!"/>
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Data Tidak Ada !!" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutkosongLogin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_btn_lapisanhijau"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/gambarkosonglogin2"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/logindulu"
+                app:riv_corner_radius="@dimen/_8sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Silakan login terlebih dahulu ya" />
         </LinearLayout>
 
 

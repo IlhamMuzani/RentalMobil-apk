@@ -12,7 +12,8 @@ interface HomeContract {
 
     interface View{
         fun initFragment(view: android.view.View)
-        fun onLoading(loading: Boolean, message: String? = "Menampilkan..")
+        fun onLoading(loading: Boolean)
+        fun onLoadingswet(loading: Boolean, message: String? = "Menampilkan..")
         fun onResult(responseProdukList: ResponseProdukList)
         fun showSuccesOk(message: String)
         fun showSucces(message: String)

@@ -1,11 +1,14 @@
 package com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.sudahbayar
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,8 +20,10 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiList
 import com.anam.rentalmobil.data.model.transaksi.ResponseTransaksiUpdate
+import com.anam.rentalmobil.ui.daftar.DaftarActivity
 import com.anam.rentalmobil.ui.fragment.fragment.notifications.tabs.menunggu.MenungguAdapter
 import com.anam.rentalmobil.ui.sweetalert.SweetAlertDialog
+import kotlinx.android.synthetic.main.fragment_sudahbayar.*
 
 class SudahbayarFragment : Fragment(), SudahbayarContract.View {
 
@@ -31,6 +36,9 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
     lateinit var swipeSudahbayar: SwipeRefreshLayout
     lateinit var layoutkosong: LinearLayout
     lateinit var lin_refresh: LinearLayout
+    lateinit var gambarKosong: ImageView
+    lateinit var logindulu: ImageView
+    lateinit var layoutdatakosonglogin: LinearLayout
 
     lateinit var sLoading: SweetAlertDialog
     lateinit var sAlert: SweetAlertDialog
@@ -52,28 +60,44 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
         return view
     }
 
+
     override fun onStart() {
         super.onStart()
-        if (prefsManager.prefIsLogin){
+        if (prefsManager.prefIsLogin) {
             presenter.getStatussudahbayar(prefsManager.prefsId.toLong())
             lin_refresh.visibility = View.VISIBLE
-        }else{
+            layoutdatakosonglogin.visibility = View.GONE
+        } else {
             lin_refresh.visibility = View.GONE
+            layoutdatakosonglogin.visibility = View.VISIBLE
         }
     }
 
     override fun initFragment(view: View) {
         sLoading = SweetAlertDialog(requireActivity(), SweetAlertDialog.PROGRESS_TYPE)
-        sSuccess = SweetAlertDialog(requireActivity(), SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
-        sError = SweetAlertDialog(requireActivity(), SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
-        sAlert = SweetAlertDialog(requireActivity(), SweetAlertDialog.WARNING_TYPE).setTitleText("Perhatian!")
+        sSuccess = SweetAlertDialog(
+            requireActivity(),
+            SweetAlertDialog.SUCCESS_TYPE
+        ).setTitleText("Berhasil")
+        sError =
+            SweetAlertDialog(requireActivity(), SweetAlertDialog.ERROR_TYPE).setTitleText("Gagal")
+        sAlert = SweetAlertDialog(
+            requireActivity(),
+            SweetAlertDialog.WARNING_TYPE
+        ).setTitleText("Perhatian!")
 
         rcvSudahbayar = view.findViewById(R.id.rcvSudahbayar)
         swipeSudahbayar = view.findViewById(R.id.swipeSudahbayar)
         layoutkosong = view.findViewById(R.id.layoutdatakosong)
         lin_refresh = view.findViewById(R.id.lin_refreshbayar)
+        gambarKosong = view.findViewById(R.id.gambardatakosong2)
+        logindulu = view.findViewById(R.id.gambarkosonglogin2)
+        layoutdatakosonglogin = view.findViewById(R.id.layoutkosongLogin2)
 
-        sudahbayarAdapter = MenungguAdapter(requireActivity(), arrayListOf()) { dataTransaksi: DataTransaksi, position: Int, type: String ->
+        sudahbayarAdapter = MenungguAdapter(
+            requireActivity(),
+            arrayListOf()
+        ) { dataTransaksi: DataTransaksi, position: Int, type: String ->
 
             dataaTransaksi = dataTransaksi
 
@@ -88,7 +112,7 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
         }
 
         swipeSudahbayar.setOnRefreshListener {
-            if (prefsManager.prefIsLogin){
+            if (prefsManager.prefIsLogin) {
                 presenter.getStatussudahbayar(prefsManager.prefsId.toLong())
             }
         }
@@ -98,6 +122,13 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
                 showSuccess("")
                 presenter.getStatussudahbayar(prefsManager.prefsId.toLong())
             }
+        }
+        gambarKosong.setOnClickListener {
+            showError("Data Tidak Ada !!")
+        }
+
+        logindulu.setOnClickListener {
+            startActivity(Intent(requireActivity(), DaftarActivity::class.java))
         }
     }
 
@@ -116,19 +147,19 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
     }
 
     override fun onResult(responseTransaksiList: ResponseTransaksiList) {
-        if (responseTransaksiList.status){
-        val transaksi: List<DataTransaksi> = responseTransaksiList.dataTransaksi
-        sudahbayarAdapter.setData(transaksi)
-
+        if (responseTransaksiList.status) {
+            val transaksi: List<DataTransaksi> = responseTransaksiList.dataTransaksi
+            sudahbayarAdapter.setData(transaksi)
             layoutkosong.visibility = View.GONE
-        }else {
+            rcvSudahbayar.visibility = View.VISIBLE
+        }else{
             layoutkosong.visibility = View.VISIBLE
             rcvSudahbayar.visibility = View.GONE
         }
     }
 
     override fun onResultDelete(responseTransaksiUpdate: ResponseTransaksiUpdate) {
-        showSuccess( responseTransaksiUpdate.message)
+        showSuccess(responseTransaksiUpdate.message)
     }
 
     override fun showDialogDelete(dataTransaksi: DataTransaksi, position: Int) {
@@ -136,13 +167,13 @@ class SudahbayarFragment : Fragment(), SudahbayarContract.View {
         dialog.setTitle("Konfirmasi")
         dialog.setMessage("Hapus ${dataTransaksi.produk.mobil.nama}?")
 
-        dialog.setPositiveButton("Hapus"){ dialog, which ->
+        dialog.setPositiveButton("Hapus") { dialog, which ->
             presenter.deletetransaksi(Constant.TRANSAKSI_ID)
             sudahbayarAdapter.removetransaksi(position)
             dialog.dismiss()
         }
 
-        dialog.setNegativeButton("Batal"){dialog, which ->
+        dialog.setNegativeButton("Batal") { dialog, which ->
             dialog.dismiss()
         }
 

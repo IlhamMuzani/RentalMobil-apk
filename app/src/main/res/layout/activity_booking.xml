@@ -208,7 +208,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lama Sewa *"
+            android:text="Lama Peminjaman *"
             android:textStyle="bold"
             android:textSize="@dimen/_10sdp"
             android:layout_gravity="start"
@@ -237,13 +237,13 @@
 
                 <EditText
                     android:id="@+id/edt_lama"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:background="@color/white"
-                    android:hint="Lama Sewa"
+                    android:hint="Masukkan lama peminjaman"
                     android:inputType="number"
                     android:textSize="@dimen/_11sdp" />
 
