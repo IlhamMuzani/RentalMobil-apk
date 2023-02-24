@@ -11,6 +11,8 @@ import com.anam.rentalmobil.data.model.Constant
 import com.anam.rentalmobil.data.model.transaksi.DataTransaksi
 import com.anam.rentalmobil.ui.fragment.fragment.notifications.detailtransaksi.DetailtransaksiActivity
 import kotlinx.android.synthetic.main.adapter_selesai.view.*
+import java.text.NumberFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -31,22 +33,6 @@ class SelesaiAdapter (val context: Context, var dataTransaksi: ArrayList<DataTra
             Constant.TRANSAKSI_ID = dataTransaksi[position].id!!
             context.startActivity(Intent(context, DetailtransaksiActivity::class.java ))
         }
-
-//        holder.view.txvOptionselesai.setOnClickListener {
-//            val popupMenu = PopupMenu(context, holder.view.txvOptionss)
-//            popupMenu.inflate(R.menu.menu_options)
-//            popupMenu.setOnMenuItemClickListener {
-//                when(it.itemId){
-//                    R.id.action_delete -> {
-//                        Constant.TRANSAKSI_ID = dataTransaksi[position].id!!
-//                        clickListener(dataTransaksi[position], position, "Delete")
-//                    }
-//                }
-//                true
-//            }
-//
-//            popupMenu.show()
-//            }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -55,7 +41,7 @@ class SelesaiAdapter (val context: Context, var dataTransaksi: ArrayList<DataTra
             view.txvtransaksiSelesai.text = dataTransaksi.produk.mobil.nama
             view.txv_tanggal.text = dataTransaksi.tanggal
             view.txvKategoriselesai.text = dataTransaksi.produk.kategori
-            view.hargaselesai.text = dataTransaksi.harga
+            view.hargaselesai.text = NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(Integer.valueOf(dataTransaksi.harga))
         }
     }
 

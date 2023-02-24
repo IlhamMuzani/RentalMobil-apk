@@ -95,7 +95,7 @@
                     android:layout_toEndOf="@+id/imvphone"
                     android:background="@color/white"
                     android:hint="No Telpone"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLength="13"
                     android:textSize="@dimen/_11sdp" />
 

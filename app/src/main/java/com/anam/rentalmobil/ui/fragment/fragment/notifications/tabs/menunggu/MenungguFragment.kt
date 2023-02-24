@@ -93,7 +93,6 @@ class MenungguFragment : Fragment(), MenungguContract.View {
             when (type) {
                 "Delete" -> showDialogDelete(dataTransaksi, position)
             }
-
         }
         rcvMenunggu.apply {
             layoutManager = LinearLayoutManager(context)

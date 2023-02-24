@@ -21,18 +21,28 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:src="@drawable/car2"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/quicksand_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/quicksand_bold"
                 android:text="@string/syarat"
+                android:textColor="@color/black"
                 android:textSize="16sp"/>
 
         </ScrollView>

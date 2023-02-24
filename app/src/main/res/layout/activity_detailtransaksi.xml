@@ -15,13 +15,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <include
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -51,7 +50,7 @@
                             android:id="@+id/imvgambardetail"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_200sdp"
-                            android:src="@drawable/img_no_image"/>
+                            android:src="@drawable/img_no_image" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -77,21 +76,21 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/_2sdp"
                                         android:text="Nama Mobil"
-                                        android:textStyle="bold"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/_14sdp"
-                                        android:textColor="@color/black" />
+                                        android:textStyle="bold" />
 
 
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:id="@+id/layoutrating"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_7sdp"
                                     android:layout_marginEnd="@dimen/_7sdp"
-                                    android:orientation="horizontal"
                                     android:gravity="end"
-                                    >
+                                    android:orientation="horizontal">
 
                                     <ImageView
                                         android:layout_width="@dimen/_15sdp"
@@ -132,9 +131,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Warna"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black"
-                                        android:textSize="@dimen/_11sdp" />
+                                        android:textSize="@dimen/_11sdp"
+                                        android:textStyle="bold" />
 
 
                                 </LinearLayout>
@@ -168,7 +167,6 @@
                                         android:text="Tahun"
                                         android:textColor="@color/black"
                                         android:textSize="14dp" />
-
 
 
                                 </LinearLayout>
@@ -287,8 +285,8 @@
                             android:id="@+id/deskripsi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
                             android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:layout_toEndOf="@+id/imvEmailuser"
                             android:paddingHorizontal="@dimen/_7sdp"
                             android:text="Fasilitas"
@@ -298,10 +296,10 @@
                             android:id="@+id/layoutdes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_7sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_7sdp"
-                            android:background="@drawable/bg_btn_lapisanabu">
+                            android:background="@drawable/bg_btn_lapisanabu"
+                            android:padding="@dimen/_7sdp">
 
                             <TextView
                                 android:id="@+id/txvfasilitasmobil"
@@ -316,23 +314,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_4sdp"
                             android:layout_marginTop="@dimen/_20sdp"
-                            android:background="@color/Abuabuputih"/>
+                            android:background="@color/Abuabuputih" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:gravity="center"
-                            android:textSize="@dimen/_12sdp"
-                            android:text="Pesanan Anda"/>
+                            android:text="Pesanan Anda"
+                            android:textSize="@dimen/_12sdp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_3sdp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -345,12 +343,11 @@
                                 android:id="@+id/txvnamapesanan"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Nama"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:gravity="end"
+                                android:text="Nama"
                                 android:textColor="@color/black"
                                 android:textSize="14dp" />
-
 
 
                         </LinearLayout>
@@ -431,8 +428,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:padding="@dimen/_3sdp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_3sdp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -444,22 +441,22 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="end">
+                                android:gravity="end"
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15ssp"
-                                    android:background="@drawable/rp"
                                     android:layout_marginEnd="@dimen/_3sdp"
+                                    android:background="@drawable/rp"
                                     android:text="00" />
 
                                 <TextView
                                     android:id="@+id/txvhargasewa"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Harga Sewa"
                                     android:layout_marginEnd="@dimen/_10sdp"
+                                    android:text="Harga Sewa"
                                     android:textColor="@color/black"
                                     android:textSize="14dp" />
 
@@ -472,9 +469,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="@dimen/_3sdp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -487,14 +484,13 @@
                                 android:id="@+id/imvbukti"
                                 android:layout_width="@dimen/_100sdp"
                                 android:layout_height="@dimen/_100sdp"
-                                android:text="Nama"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:gravity="end"
                                 android:background="@drawable/img_no_image"
+                                android:gravity="end"
+                                android:text="Nama"
                                 android:textColor="@color/black"
                                 android:textSize="14dp" />
-
 
 
                         </LinearLayout>
@@ -505,7 +501,7 @@
                             android:layout_height="@dimen/_4sdp"
                             android:layout_marginTop="@dimen/_20sdp"
                             android:layout_marginBottom="@dimen/_25sdp"
-                            android:background="@color/Abuabuputih"/>
+                            android:background="@color/Abuabuputih" />
 
                     </LinearLayout>
 
@@ -563,9 +559,7 @@
         </RelativeLayout>
 
 
-
     </LinearLayout>
-
 
 
 </RelativeLayout>

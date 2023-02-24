@@ -217,21 +217,42 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
             layoutkategoritrans.visibility = View.GONE
         }
 
-        if(transaksi.bukti.isNullOrEmpty()){
+        when(transaksi.status){
+            "menunggu" -> {
                 layout_bukti.visibility = View.GONE
                 btninvoice.visibility = View.GONE
-        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "menunggu"){
-            layout_bukti.visibility = View.GONE
-            btninvoice.visibility = View.GONE
-            btnuploadbukti.visibility = View.GONE
-        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "proses"){
-                layout_bukti.visibility = View.VISIBLE
+                btnuploadbukti.visibility = View.VISIBLE
+            }
+            "proses" -> {
                 btnuploadbukti.visibility = View.GONE
-                GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + transaksi.bukti!!, imvbukti)
-        }else if (transaksi.bukti!!.isNotEmpty() && transaksi.status == "selesai"){
-            btninvoice.visibility = View.GONE
-            btnuploadbukti.visibility = View.GONE
-            GlideHelper.setImage( applicationContext,Constant.IP_IMAGE + transaksi.bukti!!, imvbukti)
+                btninvoice.visibility = View.VISIBLE
+
+                if (transaksi.bukti.isNullOrEmpty()) {
+                    layout_bukti.visibility = View.GONE
+                }else {
+                    layout_bukti.visibility = View.VISIBLE
+                    GlideHelper.setImage(
+                        applicationContext,
+                        Constant.IP_IMAGE + transaksi.bukti!!,
+                        imvbukti
+                    )
+                }
+            }
+            "selesai" -> {
+                btninvoice.visibility = View.GONE
+                btnuploadbukti.visibility = View.GONE
+
+                if (transaksi.bukti.isNullOrEmpty()) {
+                    layout_bukti.visibility = View.GONE
+                } else {
+                    layout_bukti.visibility = View.VISIBLE
+                    GlideHelper.setImage(
+                        applicationContext,
+                        Constant.IP_IMAGE + transaksi.bukti!!,
+                        imvbukti
+                    )
+                }
+            }
         }
     }
 
