@@ -23,12 +23,12 @@ class BookingPresenter (val view: BookingContract.View) : BookingContract.Presen
     override fun inserBooking(
         pelanggan_id: String,
         produk_id: String,
-        tanggal: String,
+        waktu: String,
         lama: String,
         harga: String
     ) {
         view.onLoading(true, "Loading..")
-        ApiService.endpoint.insertBooking(pelanggan_id, produk_id, tanggal, lama, harga).enqueue(object: Callback<ResponseBookingInsert>{
+        ApiService.endpoint.insertBooking(pelanggan_id, produk_id, waktu, lama, harga).enqueue(object: Callback<ResponseBookingInsert>{
             override fun onResponse(
                 call: Call<ResponseBookingInsert>,
                 response: Response<ResponseBookingInsert>

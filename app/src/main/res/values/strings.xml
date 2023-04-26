@@ -27,16 +27,17 @@
 
 
     <string name="langkah1">Buka aplikasi Rental Mobil kemudian akan muncul halaman utama yaitu daftar mobil yang tersedia</string>
-    <string name="langkah2">Pilihlah icon akun dipojok bawah sebelah kanan</string>
-    <string name="langkah3">kemudian pilih menu registrasi atau login jika anda sudah memiliki akun</string>
+    <string name="langkah2">Pada menu notifikasi apabila belum login user akan diarahkan ke menu login</string>
+    <string name="langkah3">Pilihlah icon akun dipojok bawah sebelah kanan, kemudian pilih menu registrasi atau login jika anda sudah memiliki akun</string>
     <string name="Langkah4">Lengkapi data untuk registrasi, jika sudah benar dan selesai maka akan diarahkan ke menu login</string>
     <string name="Langkah5">Masukan nomor telepon dan password dengan benar</string>
     <string name="langkah6">Jika login berhasil maka akan diarahkan ke menu utama silakan pilih mobil mana yang akan di sewa klik detail mobil</string>
     <string name="langkah7">Selanjutnya akan ada tampilan detail mobil jika ingin melanjutkan menyewa mobil tersebut klik pada pilihan detail</string>
-    <string name="langkah8">Masukkan tanggal, lama peminjaman untuk harga akan diinputkan secara otomatis, jika sudah selesai klik booking</string>
-    <string name="langkah9">Selanjutnya pilih icon notifikasi dibagian tengah yang ada dibawah, terdapat daftar mobil yang akan di sewa, klik pada gambar mobil tersebut maka akan diarahkan ke detail transaksi</string>
-    <string name="langkah10">Pada bagian detail transaksi terdapat detail mobil dan detail bookingan, user diarahkan untuk membayar harga sewa mobil secara transfer bank atau membayar secara langsung ketempat rental mobil tersebut</string>
-    <string name="langkah11">Jika sudah bayar mobil yang akan user booking akan pindah secara otomatis ke bagian notifikasi sudah bayar</string>
+    <string name="langkah8">Isi bokingan untuk hari ini atau besok, lama peminjaman untuk harga akan diinputkan secara otomatis, jika sudah selesai klik booking</string>
+    <string name="langkah9">Selanjutnya pilih icon notifikasi dibagian tengah yang ada dibawah, jika belum melakukan pemesanan mobil maka akan ada tampilan kosong seperti dibawah ini</string>
+    <string name="langkah10">Apabila sudah melakukan pemesanan, terdapat daftar mobil yang akan di sewa, klik pada gambar mobil tersebut maka akan diarahkan ke detail transaksi</string>
+    <string name="langkah11">Pada bagian detail transaksi terdapat detail mobil dan detail bookingan, user diarahkan untuk membayar harga sewa mobil secara transfer bank atau membayar secara langsung ketempat rental mobil tersebut</string>
+    <string name="langkah12">Jika sudah bayar mobil yang akan user booking akan pindah secara otomatis ke bagian notifikasi sudah bayar</string>
 
     <string name="langkah13">Untuk melihat profil pilih icon akun dipojok bawah sebelah kanan jika user sudah login maka akan tampil profil</string>
     <string name="langkah14">Untuk merubah profil pilih ubah profil maka akan diarahkan ke form ubah profil</string>

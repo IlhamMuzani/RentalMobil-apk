@@ -54,7 +54,6 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
 
     override fun initActivity() {
         tv_nama.text = "Booking"
-        tanggal()
 
         sLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
         sSuccess = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Berhasil")
@@ -64,13 +63,15 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
 
     override fun initListener() {
 
+        spinnerwaktu()
+
         ivKembali.setOnClickListener {
             onBackPressed()
         }
 
         btn_booking.setOnClickListener {
-            if (edt_tanggal.text!!.isEmpty()) {
-                showError("Masukkan Tanggal !")
+            if (Constant.Waktu_ID == 0) {
+                showError("Pilih waktu !")
             } else if (edt_lama.text!!.isEmpty()) {
                 showError("Masukkan lama sewa !")
             } else {
@@ -113,9 +114,7 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
                 presenter.inserBooking(
                     prefsManager.prefsId,
                     Constant.PRODUK_ID.toString(),
-//                    Constant.KATEGORI_NAME,
-                    edt_tanggal.text.toString(),
-//                    Constant.LAMA_NAME,
+                    Constant.Waktu_NAME,
                     edt_lama.text.toString(),
                    Constant.HARGA
                 )
@@ -178,95 +177,65 @@ class BookingActivity : AppCompatActivity(), BookingContract.View {
         return super.onSupportNavigateUp()
     }
 
-    fun tanggal() {
-        val myCalender = Calendar.getInstance()
-        val datePicter = DatePickerDialog.OnDateSetListener { view, year, month,
-                                                              dayofmonth ->
-            myCalender.set(Calendar.YEAR, year)
-            myCalender.set(Calendar.MONTH, month)
-            myCalender.set(Calendar.DAY_OF_MONTH, dayofmonth)
-            updateLable(myCalender)
-        }
-
-        edt_tanggal.setOnClickListener {
-            DatePickerDialog(
-                this, datePicter, myCalender.get(Calendar.YEAR),
-                myCalender.get(Calendar.MONTH),
-                myCalender.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
-    }
-
-    private fun updateLable(myCalendar: Calendar) {
-        val myformat = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(myformat, Locale.UK)
-        edt_tanggal.setText(sdf.format(myCalendar.time))
-    }
-
-//    fun spinnerlama() {
-//
-//        val arrayString = ArrayList<String>()
-//        arrayString.add("- Pilih -")
-//        arrayString.add("1 Hari")
-//        arrayString.add("2 Hari")
-//        arrayString.add("3 Hari")
-//        arrayString.add("4 Hari")
-//        arrayString.add("5 Hari")
-//        arrayString.add("6 Hari")
-//        arrayString.add("7 Hari")
-//
-//        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        edt_lama.adapter = adapter
-//        val selection = adapter.getPosition(Constant.LAMA_NAME)
-//        edt_lama.setSelection(selection)
-//        edt_lama.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                when (position) {
-//                    0 -> {
-//                        Constant.LAMA_ID = 0
-//                        Constant.LAMA_NAME = "Pilih"
-//                    }
-//                    1 -> {
-//                        Constant.LAMA_ID = 1
-//                        Constant.LAMA_NAME = "1"
-//
-//                    }
-//                    2 -> {
-//                        Constant.LAMA_ID = 2
-//                        Constant.LAMA_NAME = "2"
-//                    }
-//                    3 -> {
-//                        Constant.LAMA_ID = 3
-//                        Constant.LAMA_NAME = "3"
-//                    }
-//                    4 -> {
-//                        Constant.LAMA_ID = 4
-//                        Constant.LAMA_NAME = "4"
-//                    }
-//                    5 -> {
-//                        Constant.LAMA_ID = 5
-//                        Constant.LAMA_NAME = "5"
-//                    }
-//                    6 -> {
-//                        Constant.LAMA_ID = 6
-//                        Constant.LAMA_NAME = "6"
-//                    }
-//                    else -> {
-//                        Constant.LAMA_ID = 7
-//                        Constant.LAMA_NAME = "7"
-//                    }
-//                }
-//                if (harga != 0 && Constant.LAMA_ID != 0) {
-//                    val lama = Constant.LAMA_ID * harga
-//                    edt_harga.setText((lama).toString())
-//                }
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//
-//            }
+//    fun tanggal() {
+//        val myCalender = Calendar.getInstance()
+//        val datePicter = DatePickerDialog.OnDateSetListener { view, year, month,
+//                                                              dayofmonth ->
+//            myCalender.set(Calendar.YEAR, year)
+//            myCalender.set(Calendar.MONTH, month)
+//            myCalender.set(Calendar.DAY_OF_MONTH, dayofmonth)
+//            updateLable(myCalender)
 //        }
 //
+//        edt_tanggal.setOnClickListener {
+//            DatePickerDialog(
+//                this, datePicter, myCalender.get(Calendar.YEAR),
+//                myCalender.get(Calendar.MONTH),
+//                myCalender.get(Calendar.DAY_OF_MONTH)
+//            ).show()
+//        }
 //    }
+
+//    private fun updateLable(myCalendar: Calendar) {
+//        val myformat = "dd-MM-yyyy"
+//        val sdf = SimpleDateFormat(myformat, Locale.UK)
+//        edt_tanggal.setText(sdf.format(myCalendar.time))
+//    }
+
+    fun spinnerwaktu() {
+
+        val arrayString = ArrayList<String>()
+        arrayString.add("- Pilih -")
+        arrayString.add("Hari ini")
+        arrayString.add("Besok")
+
+        val adapter = ArrayAdapter(this, R.layout.item_spinnerblack, arrayString.toTypedArray())
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        edt_waktu.adapter = adapter
+        val selection = adapter.getPosition(Constant.Waktu_NAME)
+        edt_waktu.setSelection(selection)
+        edt_waktu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when (position) {
+                    0 -> {
+                        Constant.Waktu_ID = 0
+                        Constant.Waktu_NAME = "Pilih"
+                    }
+                    1 -> {
+                        Constant.Waktu_ID = 1
+                        Constant.Waktu_NAME = "0"
+                    }
+                    2 -> {
+                        Constant.Waktu_ID = 2
+                        Constant.Waktu_NAME = "1"
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
+    }
 }

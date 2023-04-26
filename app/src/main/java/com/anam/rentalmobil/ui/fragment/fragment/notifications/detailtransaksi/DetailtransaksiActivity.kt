@@ -207,11 +207,11 @@ class DetailtransaksiActivity : AppCompatActivity(), DetailtransaksiContract.Vie
         if (transaksi.produk.kategori == "tour") {
             layoutkategoritrans.visibility = View.VISIBLE
             if (transaksi.produk.area == "luar") {
-                txvareadalamkota.visibility = View.VISIBLE
-                txvarealuarkota.visibility = View.GONE
-            } else {
                 txvareadalamkota.visibility = View.GONE
                 txvarealuarkota.visibility = View.VISIBLE
+            } else {
+                txvareadalamkota.visibility = View.VISIBLE
+                txvarealuarkota.visibility = View.GONE
             }
         } else {
             layoutkategoritrans.visibility = View.GONE

@@ -12,8 +12,8 @@ import com.anam.rentalmobil.data.model.user.ResponseUserdetail
 interface BookingContract {
 
     interface Presenter {
-        fun inserBooking(pelanggan_id: String, produk_id: String, tanggal: String, lama: String, harga: String)
-//        fun inserBookingtrevel(pelanggan_id: String, produk_id: String, kategori: String, sopir_id: String, area: String, tanggal: String, lama: String, harga: String)
+        fun inserBooking(pelanggan_id: String, produk_id: String, waktu: String, lama: String, harga: String)
+//        fun inserBookingtrevel(pelanggan_id: String, produk_id: String, kategori: String, sopir_id: String, area: String, waktu: String, lama: String, harga: String)
 //        fun getSopir()
         fun getDetailproduk(id: Long)
 

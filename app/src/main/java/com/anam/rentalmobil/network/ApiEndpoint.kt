@@ -94,7 +94,7 @@ interface ApiEndpoint {
     fun insertBooking(
         @Query("pelanggan_id") pelanggan_id: String,
         @Query("produk_id") produk_id: String,
-        @Query("tanggal") tanggal: String,
+        @Query("waktu") waktu: String,
         @Query("lama") lama: String,
         @Query("harga") harga: String,
     ): Call<ResponseBookingInsert>
@@ -106,7 +106,7 @@ interface ApiEndpoint {
         @Query("kategori") kategori: String,
         @Query("sopir_id") sopir_id: String,
         @Query("area") area: String,
-        @Query("tanggal") tanggal: String,
+        @Query("waktu") waktu: String,
         @Query("lama") lama: String,
         @Query("harga") harga: String,
     ): Call<ResponseBookingInsert>

@@ -45,7 +45,7 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/halamanutama" />
@@ -66,10 +66,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihakun" />
+                android:background="@drawable/menunggubelumlogin" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,10 +87,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihregistrasi" />
+                android:background="@drawable/masuk" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -108,10 +108,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/registrasi" />
+                android:background="@drawable/registerasi" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -129,7 +129,7 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/login" />
@@ -150,10 +150,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihdetail" />
+                android:background="@drawable/halamanutama" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -171,7 +171,7 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/detailmobil" />
@@ -192,10 +192,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/bookingan" />
+                android:background="@drawable/booking" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -213,10 +213,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/adaptermununggu" />
+                android:background="@drawable/adaptermenunggukosong" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -234,10 +234,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/detailtransaksi" />
+                android:background="@drawable/menunggu" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -255,10 +255,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/adaptersewa" />
+                android:background="@drawable/detailmenunggu" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -272,14 +272,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                 />
+                android:text="@string/langkah12" />
+            />
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/adapterhistori" />
+                android:background="@drawable/statusdaftar" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -297,10 +298,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihakun" />
+                android:background="@drawable/halamanutama" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -318,10 +319,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihprofil" />
+                android:background="@drawable/profil1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -339,10 +340,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/profil" />
+                android:background="@drawable/updateprofil" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -360,10 +361,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/pilihpassword" />
+                android:background="@drawable/profil1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -381,10 +382,10 @@
 
             <ImageView
                 android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_300sdp"
+                android:layout_height="@dimen/_400sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/ubahpassword" />
+                android:background="@drawable/updatepassword" />
 
 <!--            <TextView-->
 <!--                android:layout_width="match_parent"-->
@@ -402,7 +403,7 @@
 
 <!--            <ImageView-->
 <!--                android:layout_width="@dimen/_200sdp"-->
-<!--                android:layout_height="@dimen/_300sdp"-->
+<!--                android:layout_height="@dimen/_400sdp"-->
 <!--                android:layout_gravity="center"-->
 <!--                android:layout_marginTop="@dimen/_5sdp"-->
 <!--                android:background="@drawable/img_no_image" />-->

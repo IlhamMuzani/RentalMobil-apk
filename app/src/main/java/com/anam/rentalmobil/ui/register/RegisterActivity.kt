@@ -85,6 +85,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
                 showError("Kolom NIK tidak boleh kosong !")
             } else if (edit_textName.text!!.isEmpty()) {
                 showError("Kolom nama tidak boleh kosong !")
+            } else if (!isAlphabetical(edit_textName.text.toString())) {
+                showError("Tidak dapat memasukan simbol atau angka pada kolom nama")
             } else if (Constant.LATITUDE == "") {
                 showError("Pilih Lokasi !")
             } else if (gender == null) {
@@ -176,5 +178,9 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    private fun isAlphabetical(input: String): Boolean {
+        return input.all { it.isLetter() }
     }
 }

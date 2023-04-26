@@ -3,7 +3,7 @@ package com.anam.rentalmobil.data.model
 class Constant {
     companion object {
 
-        var IP: String = "http://192.168.1.9/travel/"
+        var IP: String = "http://192.168.43.224/travel/"
 //        var IP: String = "https://travel.ufomediategal.com/"
         var IP_IMAGE: String = IP + "public/storage/uploads/"
 
@@ -41,6 +41,9 @@ class Constant {
 
         var LAMA_ID: Int = 0
         var LAMA_NAME: String = ""
+
+        var Waktu_ID: Int = 0
+        var Waktu_NAME: String = ""
 
         var IS_CHANGED: Boolean = false
     }

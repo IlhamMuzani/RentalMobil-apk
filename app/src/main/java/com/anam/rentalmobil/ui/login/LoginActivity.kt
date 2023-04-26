@@ -142,7 +142,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     fun dummy() {
-        edit_phone.setText("pelanggan1")
-        edit_textPassword.setText("pelanggan1")
+        edit_phone.setText("810166984524")
+        edit_textPassword.setText("ahmad")
     }
 }
